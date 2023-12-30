@@ -7,7 +7,7 @@ import '../../styles/LoginForm.css';
 import MainButton from '../common/mainButton';
 
 interface LoginFormProps {
-    onSubmit: (values: LoginFormValues) => void;
+    onLoginSuccess: () => void;
 }
 
 interface LoginFormValues {
@@ -21,7 +21,7 @@ const LoginFormSchema = Yup.object({
     password: Yup.string().required('비밀번호를 입력하세요'),
 });
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
     const formik = useFormik<LoginFormValues>({
         initialValues: {
             userId: '',
@@ -36,7 +36,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 // 로그인 정보를 쿠키에 저장
                 Cookies.set('userData', JSON.stringify({ userId: values.userId }));
             }
-            onSubmit(values);
+            // 로그인 성공 시 추가 작업
+            onLoginSuccess();
         },
     });
 
@@ -86,7 +87,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 <a href="/forgot-password">비밀번호를 잃어버리셨나요?</a>
             </div>
 
-            <MainButton onClick={() => formik.handleSubmit()} className="login-button">
+            <MainButton type="submit" className="login-button">
                 로그인
             </MainButton>
         </form>
