@@ -1,17 +1,26 @@
+// LoginPage.tsx
+
 import React from 'react';
 import LoginForm from '../components/forms/LoginForm';
 import '../styles/loginPage.css';
+import { useNavigate } from 'react-router-dom';
+
 const LoginPage: React.FC = () => {
-    const handleLogin = (values: any) => {
-        // 로그인 로직 구현
-        console.log('로그인 정보:', values);
+    const navigate = useNavigate();
+
+    const handleLoginSuccess = () => {
+        // 로그인 성공 시 수행되어야 할 작업 추가
+        console.log('로그인 성공!');
+
+        // 홈페이지로 리다이렉트
+        navigate('/');
     };
 
     return (
         <div className="body">
             <div className="title">로그인</div>
             <div className="content">
-                <LoginForm onSubmit={handleLogin} />
+                <LoginForm onLoginSuccess={handleLoginSuccess} />
             </div>
         </div>
     );

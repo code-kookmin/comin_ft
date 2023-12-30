@@ -16,12 +16,12 @@ const MainButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
 
         const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
             // 추가적인 클릭 이벤트 처리
-            // ...
 
             // props로 전달된 onClick 함수 호출
             if (onClick) {
                 onClick();
             }
+
         };
 
         return (
