@@ -84,7 +84,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
                 <label htmlFor="rememberMe">로그인 유지</label>
             </div>
             <div className="forgot-password">
-                <a href="/forgot-password">비밀번호를 잃어버리셨나요?</a>
+                <a href="/findPW">비밀번호를 잃어버리셨나요?</a>
             </div>
 
             <MainButton type="submit" className="login-button">
