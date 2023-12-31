@@ -1,6 +1,6 @@
 import React from 'react';
 import FindPWForm from '../components/forms/findPWForm';
-import '../styles/findPWPage.css';
+import '../styles/loginPage.css';
 
 const FindPWPage: React.FC = () => {
     const handleResetPassword = (email: string) => {
