@@ -1,6 +1,7 @@
 .community-body {
     background-color: #ebeef1;
 }
+
 .community-header {
     width: 100%;
     height: 264px;
@@ -14,7 +15,8 @@
 
 .community-header::before {
     content: "";
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.03) 99.99%, rgba(0, 0, 0, 0.00) 100%, rgba(0, 0, 0, 0.05) 100%), url(../assets/baekjoon-big.png);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.03) 99.99%, rgba(0, 0, 0, 0.00) 100%, rgba(0, 0, 0, 0.05) 100%);
+    /* url(../assets/baekjoon-big.png); */
     width: auto !important;
     opacity: 80%;
     background-repeat: no-repeat;
@@ -28,7 +30,7 @@
 }
 
 .community-header-contents {
-    width: 100%;
+    width: auto;
     display: flex;
     margin: 0 auto;
     flex-direction: column;
@@ -51,7 +53,7 @@
 
 .community-detail {
     text-align: left;
-    padding: 0 80px 10px 100px;
+    padding: 0 60px 10px 100px;
     font-size: 20px;
     font-family: Helvetica;
     font-weight: 400;
@@ -73,12 +75,28 @@
 
 .community-name1 {
     display: inline;
-    margin: 0 5px;
+    margin: 2px 7px 0 15px;
+    color: var(--sub, #1D2830);
+    font-family: Josefin Sans;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    /* 100% */
+    letter-spacing: -1.44px;
 }
 
 .community-name2 {
     margin-top: 2px;
     color: #794CFF;
+    color: var(--sub, #794CFF);
+    font-family: Josefin Sans;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -1.44px;
+    margin-right: 10px;
 }
 
 #community-contents {
@@ -86,6 +104,15 @@
     width: 1044px;
     margin: 0 auto;
     flex-direction: row;
+}
+
+.community-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.community-sidebar-space {
+    min-height: 250px;
 }
 
 .community-sidebar {
@@ -110,19 +137,22 @@
     justify-content: space-between;
     line-height: 17px;
     font-size: 14px;
+    font-weight:bold;
 }
 
-.sidebar-menu a {
+.sidebar-subtitle {
     display: flex;
     padding: 8px 12px 7px;
     line-height: 17px;
     font-size: 14px;
+    font-weight:500;
 }
 
 .community-main {
     width: 720px;
+    min-height: 850px;
     display: flex;
-    margin: 10px 20px;
+    margin: 10px 20px 40px;
     flex-direction: column;
     text-align: left;
     border: 0.5px solid gray;
@@ -216,13 +246,13 @@
 }
 
 .community-posts {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
     list-style: none;
     margin-top: 8px;
     padding: 0;
 }
 
-.community-posts li{
+.community-posts li {
     display: flex;
     padding: 8px 16px 8px 0;
     /* height: 77px; */
@@ -256,10 +286,12 @@
     overflow: hidden;
     padding-right: 12px;
 }
+
 .community-posts-main a {
     display: flex;
     width: 100%;
 }
+
 .community-posts-title {
     max-width: 480px;
     display: inline-block;
@@ -284,13 +316,14 @@
     height: 24px;
 }
 
-.community-posts-etc span:nth-child(2){
+.community-posts-etc span:nth-child(2) {
     display: flex;
     border-left: 0.7px solid gray;
     margin-left: 8px;
     justify-content: space-between;
 }
-.community-posts-etc span:nth-child(3){
+
+.community-posts-etc span:nth-child(3) {
     display: flex;
     border-left: 0.7px solid gray;
     margin-left: 8px;
@@ -318,7 +351,7 @@
 .community-post {
     padding: 24px;
     background-color: white;
-    border-bottom: 0.5px solid lightgray ;
+    border-bottom: 0.5px solid lightgray;
 }
 
 .community-post h1 {
@@ -326,7 +359,7 @@
     font-weight: bold;
 }
 
-.community-post-title-detail{
+.community-post-title-detail {
     margin-top: 9px;
     display: flex;
     justify-content: space-between;
@@ -337,7 +370,7 @@
 .community-post-like {
     padding: 12px;
     background-color: white;
-    border-bottom: 0.5px solid lightgray ;
+    border-bottom: 0.5px solid lightgray;
 
     display: flex;
     justify-content: center;
@@ -358,7 +391,7 @@
     line-height: 38px;
     border: 1px solid #dddfe4;
     border-radius: 4px;
-    transition: all 0.3s cubic-bezier(0.075,0.82,0.165,1);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     vertical-align: middle;
     color: gray;
     background-color: white;
@@ -373,7 +406,7 @@
     background-color: white;
 }
 
-.community-post-comments-header select{
+.community-post-comments-header select {
     width: 100px;
     position: relative;
     padding: 6px 8px 5px 8px;
@@ -391,7 +424,7 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    flex-direction: column; 
+    flex-direction: column;
     flex-basis: 64px;
 }
 
@@ -403,7 +436,7 @@
     border-top: 0.5px solid lightgray;
 }
 
-.community-post-comment p{
+.community-post-comment p {
     margin: 10px 0;
 }
 
@@ -469,6 +502,7 @@
 .ql-editor {
     font-size: large;
 }
+
 .write-contents-invisible {
     display: none;
 }
@@ -482,13 +516,15 @@
     margin-top: 10px;
     border-top: 1px solid rgb(226, 226, 226);
 }
+
 .write-contents-footer-detail {
     display: flex;
     align-items: center;
     gap: 10px;
-    
+
 }
-.write-contents-footer-detail input{
+
+.write-contents-footer-detail input {
     margin-left: 10px;
     width: 130px;
 }
@@ -506,7 +542,7 @@
     line-height: 38px;
     border: 1px solid #dddfe4;
     border-radius: 4px;
-    transition: all 0.3s cubic-bezier(0.075,0.82,0.165,1);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     vertical-align: middle;
     color: white;
     background-color: #794cff;
