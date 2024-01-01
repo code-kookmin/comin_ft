@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import '../styles/Community.css';
+import '../styles/community.css';
 import 'react-quill/dist/quill.snow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faCalendar, faMagnifyingGlass, faPen, faSortUp, faThumbsDown, faThumbsUp, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import { RangeStatic } from 'quill';
 import axios from 'axios';
+import logo from '../assets/logo.png'
 
 function Community() {
 
@@ -143,8 +144,11 @@ function CommunityHeader() {
         <div className='community-logo-name'>
           <div className="community-logo" />
           <div className='community-names'>
-            <a className='community-name1' href="/community">CODE</a>
-            <a className='community-name2' href="/community">KOOKMIN 커뮤니티</a>
+            <a className='community-name1' href="/community">CODE
+              {/* <img src={logo}></img> */}
+            </a>
+            <a className='community-name2' href="/community">KOOKMIN</a>
+            <a className='community-name2' href="/community"> 커뮤니티</a>
           </div>
         </div>
         <div className='community-detail'>백준 및 코딩 전반적인 내용을 올리는 게시판입니다.<br />건전한 커뮤니티 이용을 위한 가이드라인을 참고해주시길 바라며, 이를 크게 위반한 게시물에 대해선 경고 없이 삭제됨을 알려드립니다.</div>
@@ -233,8 +237,8 @@ function CommunitySidebar() {
   // }, [])
 
   return (
-    <div className='community-sidebar'>
-      <>
+    <div className='community-left'>
+      <div className='community-sidebar'>
         {category?.map((value, i) => {
           return (
             <div className='sidebar-menu ' key={i}>
@@ -245,7 +249,7 @@ function CommunitySidebar() {
               {
                 value.sub?.map((subvalue, index) => {
                   return (
-                    <a>&nbsp;-&nbsp;&nbsp;&nbsp;{subvalue.name}</a>
+                    <a className='sidebar-subtitle'>&nbsp;-&nbsp;&nbsp;&nbsp;{subvalue.name}</a>
                   )
                 })
               }
@@ -253,8 +257,11 @@ function CommunitySidebar() {
           )
         })
         }
-      </>
+
+      </div>
+      <div className='community-sidebar-space'></div>
     </div>
+
   )
 }
 
@@ -337,7 +344,7 @@ function CommunityPostList() {
           </div>
 
           <form className='community-search' method="POST" action="/community-search">
-            <select name="search_target">
+            <select className="community-click" name="search_target">
               <option value="title">제목</option>
               <option value="content">내용</option>
               <option value="title_content" selected>제목+내용</option>
