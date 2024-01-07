@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import Cookies from 'js-cookie';
 import '../../styles/LoginForm.css';
-import MainButton from '../common/mainButton';
+import MainButton from '../common/MainButton';
 
 interface LoginFormProps {
     onLoginSuccess: () => void;
@@ -16,7 +16,7 @@ interface LoginFormValues {
     rememberMe: boolean;
 }
 
-const LoginFormSchema = Yup.object({
+const loginFormSchema = Yup.object({
     userId: Yup.string().required('아이디를 입력하세요'),
     password: Yup.string().required('비밀번호를 입력하세요'),
 });
@@ -28,7 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
             password: '',
             rememberMe: false,
         },
-        validationSchema: LoginFormSchema,
+        validationSchema: loginFormSchema,
         onSubmit: (values) => {
             //로그인 로직 구현
 

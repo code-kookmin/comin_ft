@@ -3,7 +3,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import MainButton from '../common/mainButton';
+import MainButton from '../common/MainButton';
 import '../../styles/signupForm.css';
 
 interface SignupFormProps {
@@ -22,7 +22,7 @@ interface SignupFormValues {
     agreeTerms2: boolean;
 }
 
-const SignupFormSchema = Yup.object({
+const signupFormSchema = Yup.object({
     nickname: Yup.string().min(2, '2자 이상을 입력하세요').required('닉네임을 입력하세요.'),
     userId: Yup.string()
         .min(4, '4자 이상을 입력하세요')
@@ -57,7 +57,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignUp }) => {
             agreeTerms1: false,
             agreeTerms2: false,
         },
-        validationSchema: SignupFormSchema,
+        validationSchema: signupFormSchema,
         onSubmit: (values) => {
             //회원가입 로직 구현
             onSignUp(values);

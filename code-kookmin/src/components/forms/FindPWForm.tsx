@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import MainButton from '../common/mainButton';
+import MainButton from '../common/MainButton';
 import '../../styles/findPWForm.css';
 
 interface FindPWFormProps {

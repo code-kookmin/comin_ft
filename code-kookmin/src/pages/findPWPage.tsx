@@ -1,5 +1,5 @@
 import React from 'react';
-import FindPWForm from '../components/forms/findPWForm';
+import FindPWForm from '../components/forms/FindPWForm';
 import '../styles/loginPage.css';
 
 const FindPWPage: React.FC = () => {
