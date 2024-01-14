@@ -1,5 +1,4 @@
-import { faFigma, faSquareGithub, faSquareInstagram } from "@fortawesome/free-brands-svg-icons"
-import { faSquarePen } from "@fortawesome/free-solid-svg-icons"
+import { faFigma, faSquareGithub } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import logo from '../../assets/logo-white.png';
 import notion from '../../assets/notion-icon.png'
@@ -10,7 +9,6 @@ const Footer = () => {
     return (
         <>
             <footer>
-                {/* 푸터 컴포넌트 */}
                 <div className="footer">
                     <div>
                         <Link to="/">
@@ -18,7 +16,7 @@ const Footer = () => {
                         </Link>
                     </div>
                     <div className="footer-about">
-                        <h1>CODEKOOKMIN은 여러분들께 편의를 제공하기 위해 노력합니다.</h1>
+                        <h1>CODEKOOKMIN은 편의를 제공하기 위해 노력합니다.</h1>
                     </div>
                     <div className="footer-members">
                         <IntroduceMember2
@@ -80,7 +78,7 @@ const IntroduceMember2: React.FC<FooterProps> = ({ position, name1, email1, blog
                 <div className="footer-members-name">{`: ${email1}`}</div>
             </div>
             <div className="footer-members-privacy">
-                <a className="footer-members-name" href={blog1} target="_blank">{`${name2}`}</a>
+                <a className="footer-members-name" href={blog2} target="_blank">{`${name2}`}</a>
                 <div className="footer-members-name">{`: ${email2}`}</div>
             </div>
         </div>

@@ -137,7 +137,7 @@
     justify-content: space-between;
     line-height: 17px;
     font-size: 14px;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .sidebar-subtitle {
@@ -145,12 +145,12 @@
     padding: 8px 12px 7px;
     line-height: 17px;
     font-size: 14px;
-    font-weight:500;
+    font-weight: 500;
 }
 
 .community-main {
     width: 720px;
-    min-height: 850px;
+    /* min-height: 850px; */
     display: flex;
     margin: 10px 20px 40px;
     flex-direction: column;
@@ -343,6 +343,10 @@
 }
 
 .community-click:hover {
+    cursor: pointer;
+}
+
+.hover-click:hover {
     cursor: pointer;
 }
 
