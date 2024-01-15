@@ -10,6 +10,8 @@ import Community from './pages/community';
 import MyInfo from './pages/myInfo';
 import MyActivity from './pages/myActivity';
 import ResetPW from './pages/resetPW';
+import RecommendRouter from './pages/recommendRouter';
+
 
 function App() {
     return (
@@ -26,8 +28,11 @@ function App() {
                         <Route path="/resetPW" element={<ResetPW />} />
 
                         {/* 동연 작업 */}
-                        <Route path="/community" element={<Community />}></Route>
-                        <Route path="/community/*" element={<Community />}></Route>
+                        <Route path='/community' element={<Community />} ></Route>
+                        <Route path='/community/*' element={<Community />} ></Route>
+                        <Route path='/recommend' element={<RecommendRouter />} ></Route>
+                        <Route path='/recommend/*' element={<RecommendRouter />} ></Route>
+
                     </Routes>
                 </Layout>
             }
