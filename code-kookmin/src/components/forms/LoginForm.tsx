@@ -3,8 +3,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import Cookies from 'js-cookie';
-import '../../styles/LoginForm.css';
-import MainButton from '../common/mainButton';
+import '../../styles/loginForm.css';
+import MainButton from '../common/MainButton';
 
 interface LoginFormProps {
     onLoginSuccess: () => void;
@@ -16,7 +16,7 @@ interface LoginFormValues {
     rememberMe: boolean;
 }
 
-const LoginFormSchema = Yup.object({
+const loginFormSchema = Yup.object({
     userId: Yup.string().required('아이디를 입력하세요'),
     password: Yup.string().required('비밀번호를 입력하세요'),
 });
@@ -28,7 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
             password: '',
             rememberMe: false,
         },
-        validationSchema: LoginFormSchema,
+        validationSchema: loginFormSchema,
         onSubmit: (values) => {
             //로그인 로직 구현
 
@@ -84,7 +84,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
                 <label htmlFor="rememberMe">로그인 유지</label>
             </div>
             <div className="forgot-password">
-                <a href="/forgot-password">비밀번호를 잃어버리셨나요?</a>
+                <a href="/findPW">비밀번호를 잃어버리셨나요?</a>
             </div>
 
             <MainButton type="submit" className="login-button">
