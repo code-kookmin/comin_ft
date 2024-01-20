@@ -1,0 +1,12 @@
+.body {
+    display: block;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 750;
+    padding-bottom: 30px;
+}

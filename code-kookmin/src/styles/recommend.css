@@ -1,0 +1,321 @@
+/* .recommend-body {
+    background-color: #ebeef1;
+    margin-top: 6px;
+    padding: 20px 16px;
+} */
+
+.pagetitle {
+    height: 80px;
+    flex-shrink: 0;
+    margin-top: 6px;
+    padding: 20px 16px;
+}
+
+.pagetitle-header {
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: row;
+    padding: 0px 60px 15px;
+}
+
+.pagetitle-title {
+    font-size: x-large;
+    font-weight: bolder;
+    margin-right: 7px;
+}
+
+.pagetite-question {
+    margin-top: 3px;
+    color: lightgray;
+}
+
+.pagetite-question:hover {}
+
+.pagetitle-sort {
+    display: flex;
+    flex-direction: row;
+    padding: 4px 60px;
+    gap: 4px;
+}
+
+.pagetitle-menu {
+    display: flex;
+    text-decoration: none;
+    color: #35414b;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    width: 110px;
+    height: 45px;
+    border: 0;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.pagetitle-menu span {
+    margin-top: 3px;
+}
+
+.pagetitle-menu:hover {
+    background-color: #ECE5FF;
+    transition: 0.2s
+}
+
+.pagetitle-menu-selected {
+    background-color: #ECE5FF;
+    color: #794CFF;
+    font-weight: bolder;
+}
+
+
+
+
+/* //smaillist */
+.smalllist-main {
+    display: flex;
+    /* padding: 20px 0px; */
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-x: auto;
+    table-layout: fixed;
+    word-break: break-all;
+    border: 1px solid #dddfe0;
+}
+
+.smalllist-main table {
+    /* border: 1px solid #9AA4AF; */
+    /* height: 900px; */
+}
+
+.smalllist-header {
+    display: flex;
+    min-width: 800px;
+    width: 100%;
+    height: 45px;
+    align-items: flex-end;
+    vertical-align: bottom;
+    background-color: #F7F7F9;
+}
+
+.smalllist-header-14 {
+    width: 14%;
+}
+
+.smalllist-header-10 {
+    width: 10%;
+}
+
+.smalllist-header-57 {
+    width: 57%;
+}
+
+.smalllist-header th {
+    display: table-cell;
+    border-bottom: 1px solid #dddfe0;
+    padding: 8px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.smalllist-item {
+    display: flex;
+    min-width: 800px;
+    width: 100%;
+    height: 45px;
+    align-items: flex-end;
+    vertical-align: bottom;
+    background-color: white;
+}
+
+.smalllist-item td {
+    height: 25px;
+    display: table-cell;
+    border-bottom: 1px solid #dddfe0;
+    padding: 8px;
+}
+
+.smalllist-td-14 {
+    width: 14%;
+}
+
+.smalllist-td-10 {
+    width: 10%;
+}
+
+.smalllist-td-57 {
+    width: 57%;
+}
+
+.smalllist-td {
+    margin-top: 4px;
+}
+
+
+/* pagenation */
+.pagenation {
+    display: flex;
+    min-width: 800px;
+    width: 100%;
+    height: 55px;
+    align-items: center;
+    justify-content: center;
+    background-color: #F7F7F9;
+}
+
+.pagenation button {
+    text-align: center;
+    margin-bottom: 2px;
+    border-width: 2px;
+    border-color: rgb(192, 192, 192);
+    height: 40px;
+    width: 75px;
+    border-radius: 5px;
+}
+
+
+/* Small List Detail */
+
+.smalllistdetail-header {
+    height: 120px;
+    padding: 20px 30px;
+    background-color: white;
+}
+
+.smalllistdetail-header h1 {
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.smalllistdetail-detail {
+    margin: 20px 30px;
+
+}
+
+.smalllistdetail-tooltip {
+    margin: 20px 30px;
+    color: #794CFF;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+}
+
+.smalllistdetail-tooltip-hover {
+    display: block;
+    margin: 5px 30px;
+    width: 600px;
+    background-color: white;
+    position: relative;
+    z-index: 100;
+    border: 1px solid lightgray;
+    padding: 5px 10px;
+}
+
+.smalllistdetail-tooltip-hover h3 {
+    font-weight: bolder;
+    margin: 3px 0;
+}
+
+.smalllistdetail-tooltip-hover span {
+    line-height: 1.6;
+}
+
+.smalllistdetail-main {
+    height: 320px;
+    background-color: white;
+    padding: 0px 30px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.smalllistdetail-main-now {
+    display: flex;
+    justify-content: center;
+}
+
+.smalllistdetail-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    background-color: white;
+    font-size: xx-large;
+    color: gray;
+    border: 0;
+}
+
+.smalllistdetail-main-now {}
+
+.question-box-main {
+    display: flex;
+    margin: 0 30px;
+    min-width: 600px;
+}
+
+.question-box-line {
+    width: 8px;
+    height: 100px;
+    flex-shrink: 0;
+    background-color: #794CFF;
+}
+
+.question-box {
+    min-width: 500px;
+    max-width: 750px;
+    height: 275px;
+    background-color: #F6F3FC;
+    padding: 20px 30px;
+    border-radius: 0px 0px 40px 0px;
+}
+
+.question-header {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.question-title {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.question-img {
+    width: 23px;
+    height: 27px;
+    margin-top: -1px;
+}
+
+.question-main {}
+
+.question-main-header {
+    font-weight: bold;
+}
+
+.question-detail {
+    margin: 10px 15px;
+}
+
+.smalllistdetail-footer {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+}
+
+.question-button {
+    width: 200px;
+    height: 60px;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+    background-color: #936FFF;
+    border: 1px solid #936FFF;
+    border-radius: 5px;
+}
+
+.question-box-translucent {
+    opacity: 40%;
+}

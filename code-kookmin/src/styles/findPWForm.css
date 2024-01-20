@@ -1,0 +1,29 @@
+.findPW-form {
+    max-width: 270px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+    text-align: right;
+    font-size: x-small;
+}
+
+.findPW-form div {
+    margin-bottom: 35px;
+}
+
+.findPW-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.findPW-form input {
+    width: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+}

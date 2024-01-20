@@ -1,0 +1,14 @@
+.custom-btn {
+    background-color: #794cff;
+    border: none;
+    color: #fff;
+    width: 99%;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+.custom-btn:hover {
+    background-color: #5c3dbd; /* 호버 효과 */
+}

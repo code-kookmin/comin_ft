@@ -1,0 +1,56 @@
+/* LoginForm.css */
+
+.sign-up-form {
+    max-width: 270px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+.required {
+    color: red;
+    margin-left: 2px;
+}
+.error-message {
+    color: red;
+    margin-top: 5px;
+    text-align: right;
+    font-size: x-small;
+}
+
+.sign-up-form div {
+    margin-bottom: 15px;
+}
+
+.sign-up-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.sign-up-form input {
+    width: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+}
+.terms-checkbox {
+    margin-top: 20px;
+    display: block;
+    font-size: small;
+}
+.terms-checkbox-top {
+    display: flex;
+    font-size: small;
+}
+
+.terms-checkbox input {
+    width: 10%;
+}
+.terms-checkbox .error-message {
+    font-size: x-small;
+    margin-top: -15px;
+}
+
+.sign-up-button{
+    margin-top: 15px;
+
+}
