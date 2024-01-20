@@ -11,6 +11,7 @@ import MyInfo from './pages/myInfo';
 import MyActivity from './pages/myActivity';
 import ResetPW from './pages/resetPW';
 import RecommendRouter from './pages/recommendRouter';
+import RankingRouter from './pages/rankingRouter';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
                         <Route path='/community/*' element={<Community />} ></Route>
                         <Route path='/recommend' element={<RecommendRouter />} ></Route>
                         <Route path='/recommend/*' element={<RecommendRouter />} ></Route>
-
+                        <Route path='/ranking' element={<RankingRouter />} ></Route>
                     </Routes>
                 </Layout>
             }

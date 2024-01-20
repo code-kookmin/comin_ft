@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 interface PageTitleProps {
     pagename: string,
     url: string,
+    sort1: string,
+    sort2: string
 }
 
-const PageTitle: React.FC<PageTitleProps> = ({ pagename, url }) => {
+const PageTitle: React.FC<PageTitleProps> = ({ pagename, url, sort1, sort2 }) => {
 
     return (
         <div className="pagetitle">
@@ -17,8 +19,8 @@ const PageTitle: React.FC<PageTitleProps> = ({ pagename, url }) => {
 
             </div>
             <div className="pagetitle-sort">
-                <div className="pagetitle-menu pagetitle-menu-selected"><span>전체 보기</span></div>
-                <Link className="pagetitle-menu" to={'notiers'}><span>티어 매기기</span></Link>
+                <div className="pagetitle-menu pagetitle-menu-selected"><span>{sort1}</span></div>
+                <Link className="pagetitle-menu" to={'notiers'}><span>{sort2}</span></Link>
             </div>
         </div>
     )
