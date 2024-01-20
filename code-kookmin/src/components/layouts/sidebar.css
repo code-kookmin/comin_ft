@@ -1,0 +1,41 @@
+.sidebar {
+    padding: 20px;
+    width: 200px;
+    font-weight: 500;
+}
+
+.sidebar h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.sidebar-mypage{
+    margin-bottom: 30px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 10px;
+}
+
+nav ul li {
+    margin-bottom: 9px;
+}
+
+.nav-text {
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.nav-text:hover {
+    color: #918f8f;
+    cursor: pointer;
+}
+
+.nav-text.active {
+    color: #794cff;
+}
