@@ -8,6 +8,7 @@ import FindPWPage from './pages/findPWPage';
 import SignupPage from './pages/signupPage';
 import Community from './pages/community';
 import RecommendRouter from './pages/recommendRouter';
+import RankingRouter from './pages/rankingRouter';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                         <Route path='/community/*' element={<Community />} ></Route>
                         <Route path='/recommend' element={<RecommendRouter />} ></Route>
                         <Route path='/recommend/*' element={<RecommendRouter />} ></Route>
+                        <Route path='/ranking' element={<RankingRouter />} ></Route>
                     </Routes>
                 </Layout>
 
