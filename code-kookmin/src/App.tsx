@@ -13,6 +13,7 @@ import ResetPW from './pages/resetPW';
 import RecommendRouter from './pages/recommendRouter';
 import AdminUser from './pages/adminUser';
 import AdminCommunity from './pages/adminCommnity';
+import RankingRouter from './pages/rankingRouter';
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
                         <Route path='/community/*' element={<Community />} ></Route>
                         <Route path='/recommend' element={<RecommendRouter />} ></Route>
                         <Route path='/recommend/*' element={<RecommendRouter />} ></Route>
-
+                        <Route path='/ranking' element={<RankingRouter />} ></Route>
                     </Routes>
                 </Layout>
             }
