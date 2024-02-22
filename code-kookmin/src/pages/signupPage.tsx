@@ -15,9 +15,9 @@ const SignupPage: React.FC = () => {
     };
 
     return (
-        <div className="body">
-            <div className="title">회원가입</div>
-            <div className="content">
+        <div className="login-body">
+            <div className="login-title">회원가입</div>
+            <div className="login-content">
                 <SignupForm onSignUp={handleSignUp} />
             </div>
         </div>

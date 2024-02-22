@@ -1,10 +1,10 @@
-.body {
+.login-body {
     display: block;
     margin-top: 100px;
     margin-bottom: 100px;
 }
 
-.title {
+.login-title {
     text-align: center;
     font-size: 30px;
     font-weight: 750;

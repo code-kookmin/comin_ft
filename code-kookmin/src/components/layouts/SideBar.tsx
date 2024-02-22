@@ -8,9 +8,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeItem, onItemClick }) => {
-
     //admin 브랜치에서 유저 정보에 따른 관리자 페이지 컨텐츠 유무 함수 구현
-
 
     return (
         <div className="sidebar">
@@ -57,14 +55,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, onItemClick }) => {
                                 className={`nav-text ${activeItem === 'admin/community' ? 'active' : ''}`}
                             >
                                 커뮤니티 관리
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/admin/study"
-                                className={`nav-text ${activeItem === 'admin/study' ? 'active' : ''}`}
-                            >
-                                스터디 관리
                             </Link>
                         </li>
                     </ul>

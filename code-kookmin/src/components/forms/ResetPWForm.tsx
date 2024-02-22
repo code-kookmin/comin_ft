@@ -3,6 +3,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import MainButton from '../common/MainButton';
+import { commonValidationRules, resetPWValidationRules } from './validationRules';
 
 interface ResetPWFormProps {
     onResetPW: (currentPW: string, newPW: string) => void;
@@ -15,11 +16,8 @@ interface ResetPWFormValues {
 }
 
 const resetPWFormSchema = Yup.object({
-    currentPW: Yup.string().required('현재 비밀번호를 입력하세요.'),
-    newPW: Yup.string().required('새로운 비밀번호를 입력하세요.').min(8, '최소 8자 이상이어야 합니다.'),
-    confirmPW: Yup.string()
-        .oneOf([Yup.ref('newPW')], '비밀번호가 일치해야 합니다.')
-        .required('비밀번호를 확인하세요.'),
+    ...commonValidationRules,
+    ...resetPWValidationRules,
 });
 
 const ResetPWForm: React.FC<ResetPWFormProps> = ({ onResetPW }) => {
@@ -36,7 +34,7 @@ const ResetPWForm: React.FC<ResetPWFormProps> = ({ onResetPW }) => {
         },
     });
     return (
-        <form onSubmit={formik.handleSubmit} className='resetPW-form'>
+        <form onSubmit={formik.handleSubmit} className="resetPW-form">
             <div>
                 <label htmlFor="currentPW">현재 비밀번호</label>
                 <input

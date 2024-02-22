@@ -11,6 +11,8 @@ import MyInfo from './pages/myInfo';
 import MyActivity from './pages/myActivity';
 import ResetPW from './pages/resetPW';
 import RecommendRouter from './pages/recommendRouter';
+import AdminUser from './pages/adminUser';
+import AdminCommunity from './pages/adminCommnity';
 import RankingRouter from './pages/rankingRouter';
 
 
@@ -27,6 +29,8 @@ function App() {
                         <Route path="/myInfo" element={<MyInfo />} />
                         <Route path="/myActivity" element={<MyActivity />} />
                         <Route path="/resetPW" element={<ResetPW />} />
+                        <Route path="/admin/user" element={<AdminUser />} />
+                        <Route path="/admin/community" element={<AdminCommunity />} />
 
                         {/* 동연 작업 */}
                         <Route path='/community' element={<Community />} ></Route>

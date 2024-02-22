@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import MainButton from '../common/MainButton';
 import '../../styles/findPWForm.css';
+import { commonValidationRules, signupValidationRules } from './validationRules';
 
 interface FindPWFormProps {
     onResetPassword: (email: string) => void; // 부모 컴포넌트에서 전달받을 콜백 함수
@@ -13,7 +14,7 @@ interface FindPWFormValues {
 }
 
 const FindPWFormSchema = Yup.object({
-    email: Yup.string().email('유효한 이메일 주소를 입력하세요.').required('이메일을 입력하세요.'),
+    ...commonValidationRules,
 });
 
 const FindPWForm: React.FC<FindPWFormProps> = ({ onResetPassword }) => {
