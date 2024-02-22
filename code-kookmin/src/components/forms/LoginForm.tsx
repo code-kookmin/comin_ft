@@ -3,7 +3,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import Cookies from 'js-cookie';
+<<<<<<< HEAD
 import '../../styles/loginForm.css';
+=======
+import '../../styles/LoginForm.css';
+>>>>>>> main
 import MainButton from '../common/MainButton';
 
 interface LoginFormProps {
