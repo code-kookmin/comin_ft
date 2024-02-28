@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import '../styles/community.css';
 import 'react-quill/dist/quill.snow.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
-import CommunityHeader from './communityHeader';
-import CommunitySidebar from './communitySidebar';
-import CommunityPostList from './communityPostList';
 import CommunityDetail from './communityDetail';
 import CommunityWrite from './communityWrite';
+import CommunitySidebar from '../components/community/Sidebar';
+import CommunityHeader from '../components/community/Header';
+import CommunityPostList from './communityPostList';
 
 function Community() {
 
