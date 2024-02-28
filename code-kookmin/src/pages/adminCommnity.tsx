@@ -1,38 +1,59 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/layouts/SideBar';
-import '../styles/myPage.css';
+import '../styles/admin.css';
+import AdminTable from '../components/common/AdminTable';
+import { createTheme, ThemeProvider } from '@mui/system';
+import { TextField } from '@material-ui/core';
 
 const AdminCommunity: React.FC = () => {
-    // 페이지에서 초기 데이터를 가져오는 로직
-    const fetchInitialData = () => {
-        // ... API 호출 또는 상태 관리를 통한 데이터 로딩 로직
-        return {
-            id: 'suwith',
-            baekjoonId: 'suwith',
-            nickname: '수연',
-            state: '정상',
-        };
+    const headers = ['게시판 이름', '사용여부', '그룹', '읽기 권한', '쓰기 권한', '댓글 권한', '관리']; // 표의 헤더를 정의합니다.
+    const allRows = [
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '코딩 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '코딩 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '코딩 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '코딩 게시판', '비회원', '일반회원', '일반회원', ''],
+        ['문제 추천', '사용', '정보 게시판', '비회원', '일반회원', '일반회원', ''],
+        // 추가적인 행을 이곳에 정의할 수 있습니다.
+    ];
+    const [search, setSearch] = useState('');
+    const [rows, setRows] = useState(allRows);
+
+    //회원 검색
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value);
+        if (event.target.value === '') {
+            setRows(allRows);
+        } else {
+            setRows(allRows.filter((row) => row[0].includes(event.target.value)));
+        }
     };
 
-    // const columns = [
-    //     { name: 'id', label: '번호', options: { sort: true } },
-    //     { name: 'title', label: '제목', options: { sort: true } },
-    //     { name: 'writer', label: '작성자', options: { sort: true } },
-    // ];
-
-    // 초기 데이터 가져오기
-    const initialData = fetchInitialData();
-
-    // 데이터 업데이트 및 저장 로직
-    const handleSave = (formData: any) => {
-        // ... API 호출 또는 상태 관리를 통한 데이터 저장 로직
-        console.log('Form data submitted:', formData);
+    //회원 삭제
+    const handleDelete = (rowIndex: number) => {
+        const newRows = [...rows];
+        newRows.splice(rowIndex, 1);
+        setRows(newRows);
     };
 
     return (
-        <div className="mypage-body">
+        <div className="admin-body">
             <Sidebar activeItem={'admin/community'} onItemClick={() => {}} />
-            <div>내 활동 페이지 내용</div>
+            <div className="admin-content">
+                <div className="admin-title">커뮤니티 관리</div>
+                <div className="admin-content-table">
+                    <div className="admin-search">
+                        <TextField size="small" variant="outlined" value={search} onChange={handleSearch} />
+                    </div>
+                    <AdminTable headers={headers} rows={rows} handleDelete={handleDelete} />
+                </div>
+            </div>
         </div>
     );
 };
