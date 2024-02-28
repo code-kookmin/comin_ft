@@ -17,9 +17,9 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div className="body">
-            <div className="title">로그인</div>
-            <div className="content">
+        <div className="login-body">
+            <div className="login-title">로그인</div>
+            <div className="login-content">
                 <LoginForm onLoginSuccess={handleLoginSuccess} />
             </div>
         </div>

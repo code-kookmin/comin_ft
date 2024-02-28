@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/layouts/SideBar';
-import { useNavigate } from 'react-router-dom';
 import '../styles/myPage.css';
-import MyInfoForm from '../components/forms/MyInfoForm';
 
-const MyInfo: React.FC = () => {
+const AdminCommunity: React.FC = () => {
     // 페이지에서 초기 데이터를 가져오는 로직
     const fetchInitialData = () => {
         // ... API 호출 또는 상태 관리를 통한 데이터 로딩 로직
         return {
-            nickname: '수연',
             id: 'suwith',
             baekjoonId: 'suwith',
-            birthdate: '2002-07-09',
-            email: 'suwith@kookmin.ac.kr',
-            externalLink: 'www.naver.com',
-            affiliation: '국민대학교',
-            profileMessage: 'Hello0000000000',
+            nickname: '수연',
+            state: '정상',
         };
     };
+
+    // const columns = [
+    //     { name: 'id', label: '번호', options: { sort: true } },
+    //     { name: 'title', label: '제목', options: { sort: true } },
+    //     { name: 'writer', label: '작성자', options: { sort: true } },
+    // ];
 
     // 초기 데이터 가져오기
     const initialData = fetchInitialData();
@@ -31,15 +31,10 @@ const MyInfo: React.FC = () => {
 
     return (
         <div className="mypage-body">
-            <Sidebar activeItem={'myInfo'} onItemClick={() => {}} />
-            <div className="mypage-content">
-                <div className="mypage-title">내 정보</div>
-                <div className="mypage-content-form">
-                    <MyInfoForm initialValues={initialData} onSubmit={handleSave} />
-                </div>
-            </div>
+            <Sidebar activeItem={'admin/community'} onItemClick={() => {}} />
+            <div>내 활동 페이지 내용</div>
         </div>
     );
 };
 
-export default MyInfo;
+export default AdminCommunity;

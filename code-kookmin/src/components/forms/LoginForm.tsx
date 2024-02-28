@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import Cookies from 'js-cookie';
 import '../../styles/loginForm.css';
 import MainButton from '../common/MainButton';
+import { commonValidationRules } from './validationRules';
 
 interface LoginFormProps {
     onLoginSuccess: () => void;
@@ -17,8 +18,7 @@ interface LoginFormValues {
 }
 
 const loginFormSchema = Yup.object({
-    userId: Yup.string().required('아이디를 입력하세요'),
-    password: Yup.string().required('비밀번호를 입력하세요'),
+    ...commonValidationRules,
 });
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {

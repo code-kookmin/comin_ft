@@ -6,45 +6,40 @@ import RankingListContents from "./rankingListContents";
 const rankingEx = [
     {
         user_id: 'abc123',
-        tier: '다3',
-        bio: '큰 수 계산',
+        tier: 4,
+        bio: '큰 수 계산을 할 줄 아는 사람입니다.',
         lp: 3,
         correct: 50,
-        submit: 150,
     },
     {
         user_id: 'def456',
-        tier: '다3',
-        bio: '큰 수 계산',
-        lp: 3,
+        tier: 6,
+        bio: '안녕하세요.',
+        lp: 300,
         correct: 70,
-        submit: 200,
     },
     {
         user_id: 'ghi789',
-        tier: '다3',
-        bio: '큰 수 계산',
+        tier: 9,
+        bio: '내용없음',
         lp: 3,
         correct: 40,
-        submit: 100,
     },
 ];
 
-
 export interface Ranking {
     user_id: string;
-    tier: string;
+    tier: number;
     bio: string;
     lp: number;
     correct: number;
-    submit: number;
 }
 
 const RankingList = () => {
     let [list, setList] = useState<Ranking[]>([])
 
     function getRanking() {
-        axios.get('/recommend/all')
+        axios.get(`/rankings?pageSize=${20}&pageNumber=${1}&roundId=${1}`)
             .then((result) => {
                 setList(result.data);
             });
@@ -65,9 +60,9 @@ const RankingList = () => {
                         th3="티어"
                         th4="상태 메시지"
                         th5="LP"
-                        th6="맞은 문제"
-                        th7="제출"
-                        th8="정답비율"
+                        th6="맞힌 문제"
+                        // th7="제출"
+                        // th8="정답률"
                     />
                     <RankingListContents list={list} />
                 </table>
@@ -90,23 +85,21 @@ interface RankingTableRowProps {
     th4: string;
     th5: string;
     th6: string;
-    th7: string;
-    th8: string;
 }
 
 const RankingTableRow: React.FC<RankingTableRowProps> = (data) => {
-    const { th1, th2, th3, th4, th5, th6, th7, th8 } = data;
+    const { th1, th2, th3, th4, th5, th6 } = data;
 
     return (
         <tr className="smalllist-header">
-            <th className="smalllist-header-14">{th1}</th>
-            <th className="smalllist-header-10">{th2}</th>
-            <th className="smalllist-header-57">{th3}</th>
-            <th className="smalllist-header-57">{th4}</th>
-            <th className="smalllist-header-10">{th5}</th>
+            <th className="smalllist-header-10">{th1}</th>
+            <th className="smalllist-header-14">{th2}</th>
+            <th className="smalllist-header-10">{th3}</th>
+            <th className="smalllist-header-100">{th4}</th>
+            <th className="smalllist-header-14">{th5}</th>
             <th className="smalllist-header-10">{th6}</th>
-            <th className="smalllist-header-14">{th7}</th>
-            <th className="smalllist-header-14">{th8}</th>
+            {/* <th className="smalllist-header-14">{th7}</th> */}
+            {/* <th className="smalllist-header-14">{th8}</th> */}
         </tr>
 
     )

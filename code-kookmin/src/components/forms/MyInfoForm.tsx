@@ -16,6 +16,7 @@ interface MyInfoFormProps {
     onSubmit: (values: MyInfoFormValues) => void;
 }
 
+//수정 전 유저 정보
 interface MyInfoFormValues {
     nickname: string;
     id: string;
