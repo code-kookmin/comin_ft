@@ -15,6 +15,7 @@ const RecommendRouter = () => {
                 url='/recommend'
                 sort1="전체 보기"
                 sort2="티어 매기기"
+                url_sort2="notiers"
             />
             <div className="recommend-body">
                 <Routes>

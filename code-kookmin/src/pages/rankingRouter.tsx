@@ -12,9 +12,8 @@ const RankingRouter = () => {
         <>
             <PageTitle
                 pagename='금주의 랭킹'
-                url='/recommend'
+                url='/ranking'
                 sort1="전체 보기"
-                sort2="티어별 보기"
             />
             <div className="recommend-body">
                 <Routes>
