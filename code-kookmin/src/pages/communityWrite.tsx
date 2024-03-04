@@ -7,79 +7,87 @@ import ReactQuill from "react-quill";
 
 function CommunityWrite() {
 
-  interface Category {
-    id: number;
-    name: string;
-    sub?: { name: string }[];
-  }
+  // interface Category {
+  //   id: number;
+  //   name: string;
+  //   sub?: { name: string }[];
+  // }
 
-  let categoryEx = [{
-    id: 0o00,
+  let category = [{
     name: '정보',
     sub: [
       {
+        id: 0,
         name: '문제추천',
       },
       {
+        id: 1,
         name: '코딩 뉴스',
       },
       {
+        id: 2,
         name: '팁과 노하우',
       }
     ]
   }, {
-    id: 0o01,
     name: '코딩 게시판',
     sub: [
       {
+        id: 3,
         name: 'Q&A',
       },
       {
+        id: 4,
         name: '자유',
       },
       {
+        id: 5,
         name: '언어',
       },
       {
+        id: 6,
         name: '프로젝트',
       },
       {
+        id: 7,
         name: '학부생 공부비법',
       }
     ]
   }, {
-    id: 0o02,
     name: '홍보 게시판',
     sub: [
       {
+        id: 8,
         name: '대회',
       },
       {
+        id: 9,
         name: '내 문제 홍보',
       },
     ]
   }, {
-    id: 0o03,
     name: '문의 게시판',
     sub: [
       {
+        id: 10,
         name: '문의하기',
       },
       {
+        id: 11,
         name: '내 문의',
       }
     ]
   },
   ]
 
-  let [category, setCategory] = useState<Category[]>(categoryEx);
+  // let [category, setCategory] = useState<Category[]>(categoryEx);
 
-  function getCategory() {
-    axios.get('/community/category')
-      .then((result) => {
-        setCategory(result.data);
-      });
-  }
+  // function getCategory() {
+  //   axios.get('/community/category')
+  //     .then((result) => {
+  //       setCategory(result.data);
+  //     });
+  // }
 
   //quill
   const inputRef = useRef<HTMLInputElement>(null);
@@ -104,7 +112,7 @@ function CommunityWrite() {
         formData.append('img', file);
 
         try {
-          const result = await axios.post<{ url: string }>('/note/img', formData);
+          const result = await axios.post<{ url: string }>('/community/img', formData);
           console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
           const IMG_URL = result.data.url;
 
@@ -169,7 +177,7 @@ function CommunityWrite() {
         <div className='community-write-zone'>
           <div className="write-zone">
             <h1>게시글 작성</h1>
-            <form className="write-zone-form" method="POST" action="/neighbor-ad">
+            <form className="write-zone-form" method="POST" action="/community">
               <select name="category">
                 <option key="none" value="none">카테고리 없음</option>
                 {
@@ -237,4 +245,5 @@ function CommunityWrite() {
     </div >
   );
 }
+
 export default CommunityWrite;
