@@ -17,7 +17,6 @@ function CommunityPostList() {
       date: string,//나중에 Date형식으로 변환
       like: number,
       comments: number
-      // img: ???
     };
   }
 

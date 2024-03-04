@@ -39,7 +39,7 @@ const RankingList = () => {
     let [list, setList] = useState<Ranking[]>([])
 
     function getRanking() {
-        axios.get(`/rankings?pageSize=${20}&pageNumber=${1}&roundId=${1}`)
+        axios.get(`/user/rankings`)
             .then((result) => {
                 setList(result.data);
             });
@@ -61,8 +61,6 @@ const RankingList = () => {
                         th4="상태 메시지"
                         th5="LP"
                         th6="맞힌 문제"
-                        // th7="제출"
-                        // th8="정답률"
                     />
                     <RankingListContents list={list} />
                 </table>
