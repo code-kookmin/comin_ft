@@ -4,7 +4,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import PostItem from "../components/community/PostItem";
+import PostItem from "../../components/community/PostItem";
+
+let postlistEx = [
+  {
+    id: 123,
+    post: {
+      title: '제목111',
+      category_id: "문제추천",
+      user_id: "유저아이디1",
+      date: '23.09.24',
+      like: 3,
+      comments: 12
+    },
+  },
+  {
+    id: 124,
+    post: {
+      title: '제목2',
+      category_id: "자유",
+      user_id: "유저아이디2",
+      date: '23.09.25',
+      like: 5,
+      comments: 19
+    },
+  },
+]
 
 function CommunityPostList() {
 
@@ -14,36 +39,11 @@ function CommunityPostList() {
       title: string,
       category_id: string,
       user_id: string,
-      date: string,//나중에 Date형식으로 변환
+      date: string, //나중에 Date형식으로 변환
       like: number,
       comments: number
     };
   }
-
-  let postlistEx = [
-    {
-      id: 123,
-      post: {
-        title: '제목111',
-        category_id: "문제추천",
-        user_id: "유저아이디1",
-        date: '23.09.24',
-        like: 3,
-        comments: 12
-      },
-    },
-    {
-      id: 124,
-      post: {
-        title: '제목2',
-        category_id: "자유",
-        user_id: "유저아이디2",
-        date: '23.09.25',
-        like: 5,
-        comments: 19
-      },
-    },
-  ]
 
   let [postlist, setPostlist] = useState<Postlist[]>(postlistEx);
 
@@ -98,10 +98,12 @@ function CommunityPostList() {
 
       </div>
       <ul className='community-posts'>
-        {postlist?.map((value, index) => (
-          // PostItem 컴포넌트를 사용하여 각 게시글을 렌더링합니다.
-          <PostItem key={index} id={value.id} post={value.post} />
-        ))}
+        {
+          postlist?.map((value, index) => (
+            // PostItem 컴포넌트를 사용하여 각 게시글을 렌더링합니다.
+            <PostItem key={index} id={value.id} post={value.post} />
+          ))
+        }
       </ul>
 
     </main >

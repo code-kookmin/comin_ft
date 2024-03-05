@@ -6,7 +6,7 @@ import HomePage from './pages/homePage';
 import LoginPage from './pages/loginPage';
 import FindPWPage from './pages/findPWPage';
 import SignupPage from './pages/signupPage';
-import Community from './pages/community';
+import Community from './pages/community/community';
 import MyInfo from './pages/myInfo';
 import MyActivity from './pages/myActivity';
 import ResetPW from './pages/resetPW';
