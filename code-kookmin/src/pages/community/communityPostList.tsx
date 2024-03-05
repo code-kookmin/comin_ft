@@ -5,62 +5,37 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import PostItem from "../../components/community/PostItem";
-
-let postlistEx = [
-  {
-    id: 123,
-    post: {
-      title: '제목111',
-      category_id: "문제추천",
-      user_id: "유저아이디1",
-      date: '23.09.24',
-      like: 3,
-      comments: 12
-    },
-  },
-  {
-    id: 124,
-    post: {
-      title: '제목2',
-      category_id: "자유",
-      user_id: "유저아이디2",
-      date: '23.09.25',
-      like: 5,
-      comments: 19
-    },
-  },
-]
+import { Category, category, postlistEx } from "../../components/community/communityProps";
+import { PostListProps } from "../../components/community/communityProps";
 
 function CommunityPostList() {
-
-  interface Postlist {
-    id: number;
-    post: {
-      title: string,
-      category_id: string,
-      user_id: string,
-      date: string, //나중에 Date형식으로 변환
-      like: number,
-      comments: number
-    };
-  }
-
-  let [postlist, setPostlist] = useState<Postlist[]>(postlistEx);
+  let [postlist, setPostlist] = useState<PostListProps[]>(postlistEx);
 
   //url 받아서 커뮤니티 주제 찾기
   const location = useLocation();
   const path = location.pathname;
-  const parts = path.split('/');
-  let communityTitle = decodeURIComponent(parts[parts.length - 1]);
-  // let [communityTitle, setCommunityTitle] = useState<String>(lastPart)
+  const communityTitle = decodeURIComponent(path.split('/').pop() || '');
+
+
+  //urlName으로 name 찾기
+  function getNameFromUrlName(urlName: string): string | undefined {
+    const foundCategory: Category | undefined = category?.find(category => category.urlName === urlName);
+    return foundCategory ? foundCategory.name : undefined;
+  }
 
   function getPosts() {
-    axios.get('/community/getposts')
-      .then((result) => {
-        setPostlist(result.data);
-      });
+    communityTitle == 'community'
+      ? axios.get('/community/all')//모든 글 가져오기
+        .then((result) => {
+          setPostlist(result.data);
+        })
+      : axios.get(`/community/${communityTitle}`)//필요한 게시판의 글들만 가져오기
+        .then((result) => {
+          setPostlist(result.data);
+        });
   }
   useEffect(() => {
+    // getPosts();
     console.log(location)
   }, [])
 
@@ -70,7 +45,7 @@ function CommunityPostList() {
         <div className='community1'>
           {communityTitle == 'community'
             ? <a href={`/community`}>최신 글</a>
-            : <a href={`/community/${communityTitle}`}>{communityTitle}</a>
+            : <a href={`/community/${communityTitle}`}>{getNameFromUrlName(communityTitle)}</a>
           }
           <a href="/community/write"><FontAwesomeIcon icon={faPen} /></a>
         </div>
@@ -81,21 +56,8 @@ function CommunityPostList() {
               <strong className='community-sort-text'>Latest</strong>
             </a>
           </div>
-
-          <form className='community-search' method="POST" action="/community-search">
-            <select className="community-click" name="search_target">
-              <option value="title">제목</option>
-              <option value="content">내용</option>
-              <option value="title_content" selected>제목+내용</option>
-              <option value="user_name">작성자</option>
-            </select>
-            <input name="search" placeholder="검색" type="text"></input>
-            <button type='submit' className='community-click'>
-              <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-            </button>
-          </form>
+          <CommunitySearch />
         </div>
-
       </div>
       <ul className='community-posts'>
         {
@@ -110,6 +72,21 @@ function CommunityPostList() {
   )
 }
 
-
+function CommunitySearch() {
+  return (
+    <form className='community-search' method="POST" action="/community-search">
+      <select className="community-click" name="search_target">
+        <option value="title_content" selected>제목+내용</option>
+        <option value="title">제목</option>
+        <option value="content">내용</option>
+        <option value="user_name">작성자</option>
+      </select>
+      <input name="search" placeholder="검색" type="text"></input>
+      <button type='submit' className='community-click'>
+        <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+      </button>
+    </form>
+  )
+}
 
 export default CommunityPostList;
