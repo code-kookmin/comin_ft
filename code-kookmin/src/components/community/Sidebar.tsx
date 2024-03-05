@@ -3,92 +3,74 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
 
-function CommunitySidebar() {
-
-  // interface Category {
-  //   id: number;
-  //   name: string;
-  //   sub?: { name: string }[];
-  // }
-
-  let category = [{
-    name: '정보',
-    sub: [
-      {
-        id: 0, 
-        name: '문제추천',
-      },
-      {
-        id: 1,
-        name: '코딩 뉴스',
-      },
-      {
-        id: 2,
-        name: '팁과 노하우',
-      }
-    ]
-  }, {
-    name: '코딩 게시판',
-    sub: [
-      {
-        id: 3,
-        name: 'Q&A',
-      },
-      {
-        id: 4,
-        name: '자유',
-      },
-      {
-        id: 5,
-        name: '언어',
-      },
-      {
-        id: 6,
-        name: '프로젝트',
-      },
-      {
-        id: 7,
-        name: '학부생 공부비법',
-      }
-    ]
-  }, {
-    name: '홍보 게시판',
-    sub: [
-      {
-        id: 8,
-        name: '대회',
-      },
-      {
-        id: 9,
-        name: '내 문제 홍보',
-      },
-    ]
-  }, {
-    name: '문의 게시판',
-    sub: [
-      {
-        id: 10,
-        name: '문의하기',
-      },
-      {
-        id: 11,
-        name: '내 문의',
-      }
-    ]
-  },
+export let category = [{
+  name: '정보',
+  sub: [
+    {
+      id: 0, 
+      name: '문제추천',
+    },
+    {
+      id: 1,
+      name: '코딩 뉴스',
+    },
+    {
+      id: 2,
+      name: '팁과 노하우',
+    }
   ]
+}, {
+  name: '코딩 게시판',
+  sub: [
+    {
+      id: 3,
+      name: 'Q&A',
+    },
+    {
+      id: 4,
+      name: '자유',
+    },
+    {
+      id: 5,
+      name: '언어',
+    },
+    {
+      id: 6,
+      name: '프로젝트',
+    },
+    {
+      id: 7,
+      name: '학부생 공부비법',
+    }
+  ]
+}, {
+  name: '홍보 게시판',
+  sub: [
+    {
+      id: 8,
+      name: '대회',
+    },
+    {
+      id: 9,
+      name: '내 문제 홍보',
+    },
+  ]
+}, {
+  name: '문의 게시판',
+  sub: [
+    {
+      id: 10,
+      name: '문의하기',
+    },
+    {
+      id: 11,
+      name: '내 문의',
+    }
+  ]
+},
+]
 
-  // let [category, setCategory] = useState<Category[]>(categoryEx);
-
-  // function getCategory() {
-  //   axios.get('/community/category')
-  //     .then((result) => {
-  //       setCategory(result.data);
-  //     });
-  // }
-  // useEffect(() => {
-  //   getCategory();
-  // }, [])
+function CommunitySidebar() {
 
   return (
     <div className='community-left'>
@@ -111,11 +93,9 @@ function CommunitySidebar() {
           )
         })
         }
-
       </div>
       <div className='community-sidebar-space'></div>
     </div>
-
   )
 }
 

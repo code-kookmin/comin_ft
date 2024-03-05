@@ -2,55 +2,55 @@ import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
-import Comments from "../components/layouts/Comments";
+import Comments from "../../components/layouts/Comments";
+
+export interface Post {
+  id: number;
+  post: {
+    title: string,
+    category_id: string,
+    date: string,//나중에 Date형식으로 변환
+    user_id: string,
+    views: number,
+    detail: string,
+    like: number,
+    comments: {
+      user_id: string,
+      date: string,
+      detail: string,
+      like: number,
+    }[],
+  };
+}
+
+export let postEx = [{
+  id: 123,
+  post: {
+    title: '아니 이거 머임?',
+    category_id: '문제추천 -> number로 바꾸기',
+    date: '23.09.24 -> timestamp로 바꾸기',
+    user_id: "유저아이디1",
+    views: 30,
+    detail: "이코드어케짜냐고 100번물었다",
+    like: 4,
+    comments: [{
+      user_id: "댓글작성자1",
+      date: '23.09.24',
+      detail: "이케이케하면댐",
+      like: 123
+    },
+    {
+      user_id: "댓글작성자2",
+      date: '23.09.26',
+      detail: "그걸왜못함ㅋㅋ",
+      like: 126
+    }]
+  }
+}]
 
 function CommunityDetail() {
 
-  interface Post {
-    id: number;
-    post: {
-      title: string,
-      category_id: string,
-      date: string,//나중에 Date형식으로 변환
-      user_id: string,
-      views: number,
-      detail: string,
-      like: number,
-      comments: {
-        user_id: string,
-        date: string,
-        detail: string,
-        like: number,
-      }[],
-    };
-  }
-
-  let postEx = {
-    id: 123,
-    post: {
-      title: '아니 이거 머임?',
-      category_id: '문제추천',
-      date: '23.09.24',
-      user_id: "유저아이디1",
-      views: 30,
-      detail: "이코드어케짜냐고 100번물었다",
-      like: 4,
-      comments: [{
-        user_id: "댓글작성자1",
-        date: '23.09.24',
-        detail: "이케이케하면댐",
-        like: 123
-      },
-      {
-        user_id: "댓글작성자2",
-        date: '23.09.26',
-        detail: "그걸왜못함ㅋㅋ",
-        like: 126
-      }]
-    }
-  }
-
-  let [postDetail, setPostDetail] = useState<Post>(postEx);
+  let [postDetail, setPostDetail] = useState<Post>(postEx[0]);
 
   function getPostDetail() {
     axios.get('/community/getpostdetail')
@@ -58,7 +58,6 @@ function CommunityDetail() {
         setPostDetail(result.data);
       });
   }
-
 
   return (
     <div className="community-body">
