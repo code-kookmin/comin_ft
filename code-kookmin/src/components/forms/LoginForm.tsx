@@ -1,14 +1,12 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import Cookies from 'js-cookie';
 import '../../styles/loginForm.css';
 import MainButton from '../common/MainButton';
 import { commonValidationRules } from './validationRules';
 
 interface LoginFormProps {
-    onLoginSuccess: () => void;
+    onLogin: (values: LoginFormValues) => void;
 }
 
 interface LoginFormValues {
@@ -21,7 +19,7 @@ const loginFormSchema = Yup.object({
     ...commonValidationRules,
 });
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     const formik = useFormik<LoginFormValues>({
         initialValues: {
             userId: '',
@@ -30,17 +28,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         },
         validationSchema: loginFormSchema,
         onSubmit: (values) => {
-            //로그인 로직 구현
-
-            if (values.rememberMe) {
-                // 로그인 정보를 쿠키에 저장
-                Cookies.set('userData', JSON.stringify({ userId: values.userId }));
-            }
-            // 로그인 성공 시 추가 작업
-            onLoginSuccess();
+            onLogin(values);
+            console.log(values);
         },
     });
-
     return (
         <form onSubmit={formik.handleSubmit} className="login-form">
             <div>
@@ -79,6 +70,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
                     id="rememberMe"
                     name="rememberMe"
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     checked={formik.values.rememberMe}
                 />
                 <label htmlFor="rememberMe">로그인 유지</label>

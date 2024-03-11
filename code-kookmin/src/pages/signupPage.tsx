@@ -1,5 +1,3 @@
-// SignUpPage.tsx
-
 import React from 'react';
 import SignupForm from '../components/forms/SignupForm';
 import { useNavigate } from 'react-router-dom';

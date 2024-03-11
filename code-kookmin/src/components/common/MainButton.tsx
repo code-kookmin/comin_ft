@@ -1,5 +1,3 @@
-// MainButton.tsx
-
 import React from 'react';
 import '../../styles/mainButton.css';
 
@@ -21,7 +19,6 @@ const MainButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
             if (onClick) {
                 onClick();
             }
-
         };
 
         return (

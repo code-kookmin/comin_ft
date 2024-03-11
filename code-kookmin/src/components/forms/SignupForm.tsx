@@ -1,5 +1,3 @@
-// SignUpForm.tsx
-
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -45,6 +43,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignUp }) => {
         onSubmit: (values) => {
             //회원가입 로직 구현
             onSignUp(values);
+            console.log(values);
         },
     });
 
