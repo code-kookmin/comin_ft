@@ -1,0 +1,73 @@
+footer {
+    height: 250px;
+    background-color: #1D2830;
+    padding: 45px 120px;
+}
+
+.footer {
+    width: 850px;
+    height: 250px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-logo {
+    display: inline;
+}
+
+.footer-members {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    color: silver;
+}
+
+.footer-about {
+    color: silver;
+    margin: 15px;
+}
+.footer-members-privacy {
+    display: flex;
+    flex-direction: row;
+}
+.footer-members-privacy a:hover {
+    text-decoration: underline dotted;
+}
+
+.footer-members-detail {
+    border-right: 1px solid white;
+    padding: 5px 20px;
+    font-size: 12px;
+}
+
+.footer-members-detail:nth-child(2) {
+    border: 0px;
+}
+
+.footer-members-position {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.footer-members-name {
+    margin: 5px 0 5px 5px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    color: silver;
+    gap: 15px;
+    padding: 10px;
+}
+
+.footer-notion img {
+    width: 30px;
+    height: 30px;
+}
+
+.footer-border-end {
+    border: 0px;
+}
