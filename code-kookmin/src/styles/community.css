@@ -371,11 +371,10 @@
 
 }
 
-.community-post-like {
+/* .community-post-like {
     padding: 12px;
     background-color: white;
     border-bottom: 0.5px solid lightgray;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -400,6 +399,36 @@
     color: gray;
     background-color: white;
     gap: 5px;
+} */
+
+.community-post-delete {
+    padding: 12px 24px;
+    background-color: white;
+    border-bottom: 0.5px solid lightgray;
+    display: flex;
+    flex-direction: row-reverse;
+    /* align-items: right; */
+    gap: 12px;
+}
+
+.community-post-delete button{
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+
+    font-size: 14px;
+    line-height: 38px;
+    border: 1px solid #dddfe4;
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    vertical-align: middle;
+    color: gray;
+    background-color: white;
+    gap: 3px;
 }
 
 .community-post-comments-header {
