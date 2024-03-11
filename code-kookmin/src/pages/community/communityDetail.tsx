@@ -2,9 +2,9 @@ import { faPen, faThumbsDown, faThumbsUp, faTrash } from "@fortawesome/free-soli
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Comments from "../../components/layouts/Comments";
-import { PostDetailProps, postEx } from "../../components/community/communityProps";
+import { PostDetailProps, postEx, PostUpdateProps } from "../../components/community/communityProps";
 import { categoryIdToName } from "../../components/community/PostItem";
 
 function CommunityDetail() {
@@ -16,15 +16,15 @@ function CommunityDetail() {
   const postURL = decodeURIComponent(path.split('/').pop() || '');
 
   function getPostDetail(postURL: any) {
-    axios.get(`/community/${postURL}`)
-      .then((result) => {
-        setPostDetail(result.data);
-      });
+    setPostDetail(postEx[0]);
+    // axios.get(`/community/${postURL}`)
+    //   .then((result) => {
+    //     setPostDetail(result.data);
+    //   });
   }
 
   useEffect(() => {
-    // getPostDetail(postURL);
-    console.log(postURL)
+    getPostDetail(postURL);
   }, [])
 
   return (
@@ -37,7 +37,7 @@ function CommunityDetail() {
         </div>
 
         {/* <PostLike postDetail={postDetail} /> */}
-        <PostDelete postDetail={postDetail} />
+        <PostDelete postDetail={postDetail}/>
 
         <PostCommentsInfo postDetail={postDetail} />
         <Comments comments={postDetail.post.comments} />
@@ -85,12 +85,11 @@ function PostCommentsInfo({ postDetail }: { postDetail: PostDetailProps }) {
 }
 
 function postRecommend() {
-  //추천하기
+  // 추천하기
   // axios.post(`/community/${postURL}/like`)
   //   .then((result) => {
   //     setPostDetail(result.data);
   //   }); 
-
 }
 
 function PostLike({ postDetail }: { postDetail: PostDetailProps }) {
@@ -110,10 +109,17 @@ function PostLike({ postDetail }: { postDetail: PostDetailProps }) {
   );
 }
 function PostDelete({ postDetail }: { postDetail: PostDetailProps }) {
+  const navigate = useNavigate();
+
+
   function postEdit(postURL: any) {
     axios.put(`/community/${postURL}`)
       .then((result) => {
       });
+  }
+
+  function handleUpdate() {
+    navigate(`/community/${postDetail.id}/update`);
   }
 
   return (
@@ -122,7 +128,7 @@ function PostDelete({ postDetail }: { postDetail: PostDetailProps }) {
         <FontAwesomeIcon icon={faTrash} />
         <span>삭제</span>
       </button>
-      <button className='community-click'>
+      <button className='community-click' onClick={handleUpdate}>
         <FontAwesomeIcon icon={faPen} />
         <span>수정</span>
       </button>

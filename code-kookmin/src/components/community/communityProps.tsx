@@ -38,6 +38,17 @@ export interface PostDetailProps {
     };
 }
 
+export interface PostUpdateProps {
+    id: number;
+    post: {
+        title: string,
+        category_id: number,
+        date: string,//나중에 Date형식으로 변환
+        user_id: string,
+        detail: string,
+    };
+}
+
 export let category = [{
     name: '정보',
     urlName: 'info',
@@ -159,6 +170,7 @@ export let postEx = [{
         }]
     }
 }]
+
 
 
 // function getCategoryName(categoryId: number) {

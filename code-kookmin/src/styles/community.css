@@ -102,7 +102,7 @@
 #community-contents {
     display: flex;
     width: 1044px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     flex-direction: row;
 }
 

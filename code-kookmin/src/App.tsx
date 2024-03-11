@@ -33,11 +33,11 @@ function App() {
                         <Route path="/admin/community" element={<AdminCommunity />} />
 
                         {/* 동연 작업 */}
-                        <Route path='/community' element={<Community />} ></Route>
-                        <Route path='/community/*' element={<Community />} ></Route>
-                        <Route path='/recommend' element={<RecommendRouter />} ></Route>
-                        <Route path='/recommend/*' element={<RecommendRouter />} ></Route>
-                        <Route path='/ranking' element={<RankingRouter />} ></Route>
+                        <Route path='/community' element={<Community />} />
+                        <Route path='/community/*' element={<Community />} />
+                        <Route path='/recommend' element={<RecommendRouter />} />
+                        <Route path='/recommend/*' element={<RecommendRouter />} />
+                        <Route path='/ranking' element={<RankingRouter />} />
                     </Routes>
                 </Layout>
             }
