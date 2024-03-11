@@ -1,10 +1,11 @@
-import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faThumbsDown, faThumbsUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Comments from "../../components/layouts/Comments";
 import { PostDetailProps, postEx } from "../../components/community/communityProps";
-import { useLocation } from "react-router-dom";
+import { categoryIdToName } from "../../components/community/PostItem";
 
 function CommunityDetail() {
   let [postDetail, setPostDetail] = useState<PostDetailProps>(postEx[0]);
@@ -23,7 +24,7 @@ function CommunityDetail() {
 
   useEffect(() => {
     // getPostDetail(postURL);
-    console.log(location)
+    console.log(postURL)
   }, [])
 
   return (
@@ -35,7 +36,8 @@ function CommunityDetail() {
           <p>{postDetail.post.detail}</p>
         </div>
 
-        <PostLike postDetail={postDetail} />
+        {/* <PostLike postDetail={postDetail} /> */}
+        <PostDelete postDetail={postDetail} />
 
         <PostCommentsInfo postDetail={postDetail} />
         <Comments comments={postDetail.post.comments} />
@@ -46,12 +48,15 @@ function CommunityDetail() {
 }
 
 function PostInfo({ postDetail }: { postDetail: PostDetailProps }) {
+
+  const categoryName = categoryIdToName(postDetail.post.category_id)
+
   return (
     <div className='community-post'>
       <h1>{postDetail.post.title}</h1>
       <div className='community-post-title-detail'>
         <div className='community-posts-etc'>
-          <span>{postDetail.post.category_id}</span>
+          <span>{categoryName}</span>
           <span>&nbsp; {postDetail.post.date}</span>
           <span>&nbsp; {postDetail.post.user_id}</span>
         </div>
@@ -79,6 +84,15 @@ function PostCommentsInfo({ postDetail }: { postDetail: PostDetailProps }) {
   );
 }
 
+function postRecommend() {
+  //추천하기
+  // axios.post(`/community/${postURL}/like`)
+  //   .then((result) => {
+  //     setPostDetail(result.data);
+  //   }); 
+
+}
+
 function PostLike({ postDetail }: { postDetail: PostDetailProps }) {
   return (
     <div className='community-post-like'>
@@ -91,6 +105,26 @@ function PostLike({ postDetail }: { postDetail: PostDetailProps }) {
         <FontAwesomeIcon icon={faThumbsDown} />
         <span>비추천</span>
         <span></span>
+      </button>
+    </div>
+  );
+}
+function PostDelete({ postDetail }: { postDetail: PostDetailProps }) {
+  function postEdit(postURL: any) {
+    axios.put(`/community/${postURL}`)
+      .then((result) => {
+      });
+  }
+
+  return (
+    <div className='community-post-delete'>
+      <button className='community-click'>
+        <FontAwesomeIcon icon={faTrash} />
+        <span>삭제</span>
+      </button>
+      <button className='community-click'>
+        <FontAwesomeIcon icon={faPen} />
+        <span>수정</span>
       </button>
     </div>
   );

@@ -14,22 +14,22 @@ function Community() {
   return (
     <div className="community-body">
       <CommunityHeader />
-      {/* 커뮤니티 컨텐츠들 */}
       <div id='community-contents'>
         <CommunitySidebar />
         <div>
           <Routes>
             <Route path='/' element={<CommunityPostList />} />
+
             {
               categoryURL?.map((id) => {
                 return (
-                  <Route path={`/${id}`} >
-                    <Route index element={<CommunityPostList />} />
-                    <Route path=':id' element={<CommunityDetail />} />
-                  </Route>
+                  <Route path={`/${id}`} element={<CommunityPostList />} />
                 )
               })
             }
+            
+            <Route path=':id' element={<CommunityDetail />} />
+
             <Route path='/write' element={<CommunityWrite />} />
           </Routes>
         </div>

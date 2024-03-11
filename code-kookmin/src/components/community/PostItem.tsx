@@ -3,23 +3,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortUp } from "@fortawesome/free-solid-svg-icons";
 import { PostListProps, category } from "./communityProps";
 
-const PostItem: React.FC<PostListProps> = ({ id, post }) => {
-
-    function getCategoryName(categoryId: number) {
-        // category 배열에서 categoryId에 해당하는 카테고리를 찾습니다.
-        for (let i = 0; i < category.length; i++) {
-            const cat = category[i];
-            for (let j = 0; j < cat.sub.length; j++) {
-                if (cat.sub[j].id === categoryId) {
-                    return cat.sub[j].name;
-                }
+export function categoryIdToName(categoryId: number) {
+    // category 배열에서 categoryId에 해당하는 카테고리를 찾습니다.
+    for (let i = 0; i < category.length; i++) {
+        const cat = category[i];
+        for (let j = 0; j < cat.sub.length; j++) {
+            if (cat.sub[j].id === categoryId) {
+                return cat.sub[j].name;
             }
         }
-        // 찾지 못한 경우 빈 문자열을 반환합니다.
-        return '';
     }
+    // 찾지 못한 경우 빈 문자열을 반환합니다.
+    return '';
+}
+
+const PostItem: React.FC<PostListProps> = ({ id, post }) => {
+
     //받아온 post.category_id를 자체 name으로 변환시켜서 갖다주기
-    const categoryName = getCategoryName(post.category_id);
+    const categoryName = categoryIdToName(post.category_id);
 
 
     return (

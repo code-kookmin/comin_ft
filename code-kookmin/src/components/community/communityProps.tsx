@@ -41,6 +41,7 @@ export interface PostDetailProps {
 export let category = [{
     name: '정보',
     urlName: 'info',
+    id: 0,
     sub: [
         {
             id: 0,
@@ -139,7 +140,7 @@ export let postEx = [{
     post: {
         title: '아니 이거 머임?',
         category_id: 3,
-        date: '23.09.24 -> timestamp로 바꾸기',
+        date: '23.09.24',
         user_id: "유저아이디1",
         views: 30,
         detail: "이코드어케짜냐고 100번물었다",
