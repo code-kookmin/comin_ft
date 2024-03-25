@@ -2,98 +2,21 @@ import { faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { RangeStatic } from "quill";
-import { useMemo, useRef, useState } from "react";
+import { FormEvent, SetStateAction, useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill";
+import { category } from "../../components/community/communityProps";
 
 function CommunityWrite() {
-
-  // interface Category {
-  //   id: number;
-  //   name: string;
-  //   sub?: { name: string }[];
-  // }
-
-  let category = [{
-    name: '정보',
-    sub: [
-      {
-        id: 0,
-        name: '문제추천',
-      },
-      {
-        id: 1,
-        name: '코딩 뉴스',
-      },
-      {
-        id: 2,
-        name: '팁과 노하우',
-      }
-    ]
-  }, {
-    name: '코딩 게시판',
-    sub: [
-      {
-        id: 3,
-        name: 'Q&A',
-      },
-      {
-        id: 4,
-        name: '자유',
-      },
-      {
-        id: 5,
-        name: '언어',
-      },
-      {
-        id: 6,
-        name: '프로젝트',
-      },
-      {
-        id: 7,
-        name: '학부생 공부비법',
-      }
-    ]
-  }, {
-    name: '홍보 게시판',
-    sub: [
-      {
-        id: 8,
-        name: '대회',
-      },
-      {
-        id: 9,
-        name: '내 문제 홍보',
-      },
-    ]
-  }, {
-    name: '문의 게시판',
-    sub: [
-      {
-        id: 10,
-        name: '문의하기',
-      },
-      {
-        id: 11,
-        name: '내 문의',
-      }
-    ]
-  },
-  ]
-
-  // let [category, setCategory] = useState<Category[]>(categoryEx);
-
-  // function getCategory() {
-  //   axios.get('/community/category')
-  //     .then((result) => {
-  //       setCategory(result.data);
-  //     });
-  // }
-
   //quill
   const inputRef = useRef<HTMLInputElement>(null);
   const quillRef = useRef<ReactQuill | null>(null);
   const [textValue, setTextValue] = useState<string>('');
   const [username, setUsername] = useState<string>('유저네임');
+  const [title, setTitle] = useState<string>('');
+  const handleTitleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    // 입력 필드의 새로운 값으로 'title' 상태를 업데이트합니다.
+    setTitle(event.target.value);
+  };
 
   const imageHandler = () => {
     console.log('에디터에서 이미지 버튼을 클릭하면 핸들러가 시작됩니다!');
@@ -155,11 +78,18 @@ function CommunityWrite() {
   ];
 
   let today = new Date();
-  let year: number = today.getFullYear();
-  let month: string | number = today.getMonth() + 1;
-  if (month < 10) { month = 0 + String(month) };
-  let date: string | number = today.getDate();
-  if (date < 10) { date = '0' + String(date) };
+  const timestamp = today.getTime();
+  const formatDate = (timestamp: number): string => {
+    const date = new Date(timestamp);
+
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해주고, 2자리 수를 유지
+    const day = date.getDate().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
 
   const checkTextLength = () => {
     if (textValue.trim().length === 0) {
@@ -168,6 +98,17 @@ function CommunityWrite() {
     }
   };
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // 페이지 새로고침 방지
+
+    // form 데이터 로깅
+    const formData = new FormData(event.currentTarget); // FormData 인스턴스 생성
+    console.log("카테고리:", formData.get('category'));
+    console.log("제목:", formData.get('title'));
+    console.log("내용:", textValue); // ReactQuill에서 관리하는 상태
+    console.log("작성자:", formData.get('writer'));
+    console.log("작성일:", formData.get('writeDate'));
+  };
 
   return (
     <div className="community-body">
@@ -177,18 +118,19 @@ function CommunityWrite() {
         <div className='community-write-zone'>
           <div className="write-zone">
             <h1>게시글 작성</h1>
-            <form className="write-zone-form" method="POST" action="/community">
+            <form className="write-zone-form" method="POST" action="/community" onSubmit={handleSubmit}>
               <select name="category">
                 <option key="none" value="none">카테고리 없음</option>
+
                 {
                   category.map((value, index) => {
                     return (
                       <>
-                        <option key="123" value={value.name}>{value.name}</option>
+                        <option value={value.id} disabled>{value.name}</option>
                         {
                           value.sub?.map((a, i) => {
                             return (
-                              <option key="123" value={a.name}>- {a.name}</option>
+                              <option value={a.id}>- {a.name}</option>
                             )
                           })
                         }
@@ -202,6 +144,8 @@ function CommunityWrite() {
                 className="write-title"
                 placeholder="제목"
                 name="title"
+                value={title}
+                onChange={handleTitleChange}
               />
               <div className='write-contents-main'>
                 <ReactQuill
@@ -229,7 +173,7 @@ function CommunityWrite() {
                   </div>
                   <div>
                     <FontAwesomeIcon icon={faCalendar} />
-                    <input type="text" className="write-note-write-date" name="writeDate" value={year + '.' + month + '.' + date} readOnly />
+                    <input type="text" className="write-note-write-date" name="writeDate" value={formatDate(timestamp)} readOnly />
                   </div>
                 </div>
                 <button className="write-contents-submit community-click" type='submit' onClick={() => { checkTextLength(); }}>발행</button>

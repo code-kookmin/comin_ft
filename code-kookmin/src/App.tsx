@@ -15,6 +15,7 @@ import AdminUser from './pages/adminUser';
 import AdminCommunity from './pages/adminCommnity';
 import RankingRouter from './pages/rankingRouter';
 
+export const DOMAIN_NAME = "http://localhost:8080"
 
 function App() {
     return (

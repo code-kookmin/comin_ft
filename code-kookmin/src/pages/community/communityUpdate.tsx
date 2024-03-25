@@ -165,8 +165,8 @@ function CommunityUpdate({ post }: { post: PostUpdateProps }) {
         </div>
 
       </main>
-      {/* 글 작성하기 끝 */}
-    </div >
+      
+    </div>
   );
 }
 

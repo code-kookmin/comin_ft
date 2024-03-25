@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Comments from "../../components/layouts/Comments";
 import { PostDetailProps, postEx, PostUpdateProps } from "../../components/community/communityProps";
 import { categoryIdToName } from "../../components/community/PostItem";
+import { DOMAIN_NAME } from "../../App";
+import CommentPost from "../../components/community/CommentPost";
 
 function CommunityDetail() {
   let [postDetail, setPostDetail] = useState<PostDetailProps>(postEx[0]);
@@ -17,10 +19,11 @@ function CommunityDetail() {
 
   function getPostDetail(postURL: any) {
     setPostDetail(postEx[0]);
-    // axios.get(`/community/${postURL}`)
-    //   .then((result) => {
-    //     setPostDetail(result.data);
-    //   });
+    axios.get(`${DOMAIN_NAME}/community/${postURL}`)
+      .then((result) => {
+        console.log(result.data)
+        setPostDetail(result.data);
+      });
   }
 
   useEffect(() => {
@@ -37,10 +40,17 @@ function CommunityDetail() {
         </div>
 
         {/* <PostLike postDetail={postDetail} /> */}
-        <PostDelete postDetail={postDetail}/>
+        <PostDelete postDetail={postDetail} />
 
         <PostCommentsInfo postDetail={postDetail} />
+        {/* 로그인 돼있는지 안돼있는지 확인하고 이부분 보여주기 */}
+        {
+          1 === 1
+            ? <CommentPost />
+            : null
+        }
         <Comments comments={postDetail.post.comments} />
+
       </main>
 
     </div>

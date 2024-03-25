@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import "../styles/recommend.css"
-import axios from "axios";
 import SmallList from "./smallList";
 import PageTitle from "./pageTitle";
 import SmallListDetail from "./smallListDetail";
