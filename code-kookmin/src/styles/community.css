@@ -102,7 +102,7 @@
 #community-contents {
     display: flex;
     width: 1044px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     flex-direction: row;
 }
 
@@ -411,7 +411,7 @@
     gap: 12px;
 }
 
-.community-post-delete button{
+.community-post-delete button {
     width: 80px;
     display: flex;
     align-items: center;
@@ -473,6 +473,68 @@
     margin: 10px 0;
 }
 
+.comment-post {
+    background-color: white;
+    height: 40px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.comment-post img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #aaaaaa;
+}
+
+.comment-post-form {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    gap: 10px;
+}
+
+.comment-post input {
+    font-size: 15px;
+    color: #222222;
+    width: 90%;
+    border: none;
+    border-bottom: solid #aaaaaa 1px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    position: relative;
+    background: none;
+    z-index: 5;
+}
+
+input::placeholder {
+    color: #aaaaaa;
+}
+
+input:focus {
+    outline: none;
+}
+
+.comment-post-button {
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+
+    font-size: 14px;
+    line-height: 38px;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    background-color: #aaaaaa;
+    gap: 3px;
+}
 
 
 /* community-write */
@@ -507,10 +569,15 @@
     outline: none;
 }
 
+.write-contents-footer-detail input {
+    margin-left: 10px;
+    min-width: 130px;
+}
+
 .write-zone-form input {
     border: 1px solid lightgray;
     box-sizing: border-box;
-    padding: 10px 32px 9px 16px;
+    padding: 10px 5px 9px 16px;
     line-height: 17px;
     font-size: 14px;
     outline: none;
@@ -555,11 +622,6 @@
     align-items: center;
     gap: 10px;
 
-}
-
-.write-contents-footer-detail input {
-    margin-left: 10px;
-    width: 130px;
 }
 
 .write-contents-submit {

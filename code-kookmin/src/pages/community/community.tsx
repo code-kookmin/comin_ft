@@ -6,10 +6,14 @@ import CommunityWrite from './communityWrite';
 import CommunitySidebar from '../../components/community/Sidebar';
 import CommunityHeader from '../../components/community/Header';
 import CommunityPostList from './communityPostList';
-import { category } from '../../components/community/communityProps';
+import { category, postEx, PostUpdateProps } from '../../components/community/communityProps';
+import CommunityUpdate from './communityUpdate';
+import { useState } from 'react';
 
 function Community() {
   const categoryURL = category.map((item) => item.urlName);
+
+  let [postUpdate, setPostUpdate] = useState<PostUpdateProps>(postEx[0]);
 
   return (
     <div className="community-body">
@@ -27,8 +31,11 @@ function Community() {
                 )
               })
             }
-            
-            <Route path=':id' element={<CommunityDetail />} />
+
+            <Route path=':id' >
+              <Route index element={<CommunityDetail />} />
+              <Route path='update' element={<CommunityUpdate post={postUpdate}/>} />
+            </Route>
 
             <Route path='/write' element={<CommunityWrite />} />
           </Routes>

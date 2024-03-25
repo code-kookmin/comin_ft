@@ -2,21 +2,22 @@ import { faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { RangeStatic } from "quill";
-import { FormEvent, SetStateAction, useMemo, useRef, useState } from "react";
+import { SetStateAction, useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill";
-import { category } from "../../components/community/communityProps";
+import { category, PostUpdateProps } from "../../components/community/communityProps";
 
-function CommunityWrite() {
+function CommunityUpdate({ post }: { post: PostUpdateProps }) {
+
   //quill
   const inputRef = useRef<HTMLInputElement>(null);
   const quillRef = useRef<ReactQuill | null>(null);
-  const [textValue, setTextValue] = useState<string>('');
-  const [username, setUsername] = useState<string>('유저네임');
-  const [title, setTitle] = useState<string>('');
+  const [textValue, setTextValue] = useState<string>(post.post.detail);
+  const [title, setTitle] = useState<string>(post.post.title);
   const handleTitleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     // 입력 필드의 새로운 값으로 'title' 상태를 업데이트합니다.
     setTitle(event.target.value);
   };
+
 
   const imageHandler = () => {
     console.log('에디터에서 이미지 버튼을 클릭하면 핸들러가 시작됩니다!');
@@ -47,6 +48,7 @@ function CommunityWrite() {
           }
         } catch (error) {
           console.log('실패했어요ㅠ', error);
+          alert('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
         }
       }
     });
@@ -78,36 +80,14 @@ function CommunityWrite() {
   ];
 
   let today = new Date();
-  const timestamp = today.getTime();
-  const formatDate = (timestamp: number): string => {
-    const date = new Date(timestamp);
-
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해주고, 2자리 수를 유지
-    const day = date.getDate().toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
-  };
+  let year = today.getFullYear();
+  let month = `${today.getMonth() + 1}`.padStart(2, '0'); // padStart를 사용하여 두 자리수 유지
+  let date = `${today.getDate()}`.padStart(2, '0');
 
   const checkTextLength = () => {
     if (textValue.trim().length === 0) {
       setTextValue('내용이 없습니다');
-      // length가 0이면 POST 막기
     }
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // 페이지 새로고침 방지
-
-    // form 데이터 로깅
-    const formData = new FormData(event.currentTarget); // FormData 인스턴스 생성
-    console.log("카테고리:", formData.get('category'));
-    console.log("제목:", formData.get('title'));
-    console.log("내용:", textValue); // ReactQuill에서 관리하는 상태
-    console.log("작성자:", formData.get('writer'));
-    console.log("작성일:", formData.get('writeDate'));
   };
 
   return (
@@ -117,20 +97,20 @@ function CommunityWrite() {
       <main className='community-main'>
         <div className='community-write-zone'>
           <div className="write-zone">
-            <h1>게시글 작성</h1>
-            <form className="write-zone-form" method="POST" action="/community" onSubmit={handleSubmit}>
+            <h1>게시글 수정</h1>
+            <form className="write-zone-form" method="POST" action="/community">
               <select name="category">
-                <option key="none" value="none">카테고리 없음</option>
-
                 {
                   category.map((value, index) => {
                     return (
                       <>
-                        <option value={value.id} disabled>{value.name}</option>
+                        <option key="123" value={value.id} disabled>{value.name}</option>
                         {
                           value.sub?.map((a, i) => {
                             return (
-                              <option value={a.id}>- {a.name}</option>
+                              a.id === post.post.category_id
+                                ? <option key="123" value={a.id} selected>- {a.name}</option>
+                                : <option key="123" value={a.id}>- {a.name}</option>
                             )
                           })
                         }
@@ -169,14 +149,14 @@ function CommunityWrite() {
                 <div className='write-contents-footer-detail'>
                   <div>
                     <FontAwesomeIcon icon={faUser} />
-                    <input type="text" className="write-note-writer" name="writer" value={username} readOnly />
+                    <input type="text" className="write-note-writer" name="writer" value={post.post.user_id} readOnly />
                   </div>
                   <div>
                     <FontAwesomeIcon icon={faCalendar} />
-                    <input type="text" className="write-note-write-date" name="writeDate" value={formatDate(timestamp)} readOnly />
+                    <input type="text" className="write-note-write-date" name="writeDate" value={post.post.date} readOnly />
                   </div>
                 </div>
-                <button className="write-contents-submit community-click" type='submit' onClick={() => { checkTextLength(); }}>발행</button>
+                <button className="write-contents-submit community-click" type='submit' onClick={() => { checkTextLength(); }}>수정</button>
               </div>
 
             </form>
@@ -185,9 +165,9 @@ function CommunityWrite() {
         </div>
 
       </main>
-      {/* 글 작성하기 끝 */}
-    </div >
+      
+    </div>
   );
 }
 
-export default CommunityWrite;
+export default CommunityUpdate;

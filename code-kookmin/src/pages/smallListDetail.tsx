@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import tier0 from "../assets/티어아이콘/0.svg";
 import { Link } from "react-router-dom";
+import { DOMAIN_NAME } from "../App";
 
 interface UnratedQuestion {
-    title: string;
+    titleKo: string;
     description: string;
-    num: number
+    problemId: number
 }
 
 const QuestionBox: React.FC<{ question: UnratedQuestion }> = ({ question }) => {
@@ -18,7 +19,7 @@ const QuestionBox: React.FC<{ question: UnratedQuestion }> = ({ question }) => {
             <div className="question-box">
                 <div className="question-header">
                     <img className="no-tier-img" src={tier0} alt={`Tier0`} />
-                    <span className="question-title">{question.title}</span>
+                    <span className="question-title">{question.titleKo}</span>
                     {/* 이미지 소스 추가 */}
                 </div>
                 <div className="question-main">
@@ -61,7 +62,7 @@ const QuestionBoxBefore: React.FC<{ question: UnratedQuestion }> = ({ question }
             <div className="question-box question-box-translucent">
                 <div className="question-header">
                     <img className="no-tier-img" src={tier0} alt={`Tier0`} />
-                    <span className="question-title">{question.title}</span>
+                    <span className="question-title">{question.titleKo}</span>
                 </div>
                 <div className="question-main">
                     <div className="question-main-header">문제 본문</div>
@@ -92,7 +93,7 @@ const SmallListDetail: React.FC = () => {
 
     async function getCategory() {
         try {
-            const result = await axios.get("/recommend/unrated");
+            const result = await axios.get(`${DOMAIN_NAME}/problem/recommendation`);
             setUnratedQuestions(result.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -100,27 +101,8 @@ const SmallListDetail: React.FC = () => {
     }
 
     useEffect(() => {
-        // getCategory()
-        // 여기서 question 배열을 상태로 설정합니다.
-        const questions: UnratedQuestion[] = [
-            {
-                title: "피보나치 수열",
-                description: "피보나치 수열은 각 항이 바로 앞의 두 항의 합인 수열이다. 시작은 0과 1로, 다음 항은 1이다. 이어지는 항들은 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...이다. 이러한 수열을 계산하는 프로그램을 작성하라.",
-                num: 9545
-            },
-            {
-                title: "소수 찾기",
-                description: "주어진 숫자 n이 소수인지 판별하는 알고리즘을 작성하라. 소수는 1과 자기 자신만을 약수로 갖는 양의 정수이다.",
-                num: 9000
-            },
-            {
-                title: "배열 뒤집기",
-                description: "주어진 배열을 뒤집는 알고리즘을 작성하라. 예를 들어, [1, 2, 3, 4, 5]가 주어졌을 때, [5, 4, 3, 2, 1]로 배열을 뒤집어야 한다.",
-                num: 9829
-            }
-        ];
-        setUnratedQuestions(questions);
-    }, []); // 빈 배열을 전달하여 한 번만 실행되도록 합니다.
+        getCategory();
+    }, []);
 
     return (
         <>
@@ -152,7 +134,7 @@ const SmallListDetail: React.FC = () => {
 
             <div className="smalllistdetail-footer">
                 {unratedQuestions[currentIndex] && (
-                    <Link to={`https://www.acmicpc.net/problem/${unratedQuestions[currentIndex].num}`}>
+                    <Link to={`https://www.acmicpc.net/problem/${unratedQuestions[currentIndex].problemId}`}>
                         <button className="question-button hover-click">풀어보기</button>
                     </Link>
                 )}
