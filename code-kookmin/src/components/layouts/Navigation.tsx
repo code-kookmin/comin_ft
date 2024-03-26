@@ -18,9 +18,6 @@ function Navigation() {
                 <Link className="navbarmenu" to={'/ranking'}>
                     금주의 랭킹
                 </Link>
-                <Link className="navbarmenu" to={'/study'}>
-                    스터디 그룹
-                </Link>
             </div>
         </div>
     );
