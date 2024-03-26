@@ -31,13 +31,13 @@ const signupFormSchema = Yup.object({
 const SignupForm: React.FC<SignupFormProps> = ({ onSignUp }) => {
     const formik = useFormik<SignupFormValues>({
         initialValues: {
-            nickname: '',
-            userId: '',
-            baekjoonId: '',
-            email: '',
-            affiliation: '',
-            password: '',
-            confirmPassword: '',
+            nickname: 'asdf',
+            userId: 'asdf1234',
+            baekjoonId: 'asdf',
+            email: 'asdf@gmail.com',
+            affiliation: 'asdf',
+            password: 'asdf1234',
+            confirmPassword: 'asdf1234',
             agreeTerms1: false,
             agreeTerms2: false,
         },
