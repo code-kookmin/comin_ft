@@ -3,8 +3,11 @@
     top: 0;
     padding: 30px 50px;
     height: 45px;
-    background-color: #FBFAFE;
+    background-color: #fbfafe;
     display: block;
+    position: fixed; /* 또는 'absolute' */
+    width: 100%; /* 전체 너비 */
+    z-index: 1000; /* 다른 요소들보다 앞에 위치하도록 z-index 설정 */
 }
 
 .header-top {
@@ -30,11 +33,11 @@
 }
 
 .signup {
-  padding: 5px 10px;
+    padding: 5px 10px;
     text-decoration: none;
     font-weight: 700;
     border-radius: 4px;
-    border: 1px solid #ECE5FF;
-    background-color: #ECE5FF;
-    color: #794CFF;
+    border: 1px solid #ece5ff;
+    background-color: #ece5ff;
+    color: #794cff;
 }

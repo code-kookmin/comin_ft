@@ -1,0 +1,112 @@
+.home-first,
+.home-second {
+    height: 500px;
+    width: 100%;
+    position: relative;
+    background-color: white;
+    text-align: center;
+    margin-top: 300px;
+    justify-content: center;
+}
+
+/*home-fisrt*/
+
+.circle {
+    width: 2300px;
+    height: 2300px;
+    background-color: #fbfafe;
+    border-radius: 50%; /* 원 모양 */
+    position: absolute;
+    top: 0; /* 상단에 위치 */
+    left: 50%; /* 가운데 정렬을 위해 */
+    transform: translate(-50%, -70%); /* 완벽 중앙 정렬 */
+    z-index: 1;
+}
+
+.home-first-group {
+    width: 100%;
+    position: relative; /* z-index가 적용되도록 position 설정 */
+    z-index: 2; /* circle보다 높게 설정하여 앞에 표시 */
+}
+
+.home-first-title {
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.logo {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.logo span {
+    color: #794cff;
+}
+
+.home-first-search {
+    position: relative; /* 버튼을 input 내부에 위치시키기 위해 relative로 설정 */
+    display: flex;
+    align-items: center;
+}
+
+.home-fisrt-search input {
+    width: 400px;
+    border: 1px solid #794cff;
+    border-radius: 30px;
+    padding: 15px 20px;
+    font-size: 14px;
+    background-color: #ece5ff;
+    padding-right: 40px;
+}
+.home-first-search-button {
+    position: absolute; /* 부모 요소(.home-first-search) 대비 절대 위치 */
+    border: none; /* 버튼의 기본 테두리 제거 */
+    background-color: transparent; /* 버튼 배경을 투명하게 설정 */
+    cursor: pointer; /* 마우스 오버 시 포인터 모양 변경 */
+    transform: translate(-130%, 35%);
+}
+
+.home-first-search-button img {
+    width: 24px; /* 이미지 크기 조절, 필요에 따라 변경 가능 */
+    height: auto; /* 이미지 비율 유지 */
+}
+
+/*home-second*/
+.home-second {
+    height: 700px;
+}
+
+.home-second-title {
+    font-size: 40px;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.home-second-subtitle {
+    font-size: 20px;
+    margin-bottom: 100px;
+    font-weight: 400;
+}
+.home-second-group {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+.home-second-left,
+.home-second-right {
+    width: 50%;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.home-second-content-title {
+    font-size: 40px;
+    margin-bottom: 100px;
+    font-weight: 700;
+}
