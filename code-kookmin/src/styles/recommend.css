@@ -367,6 +367,24 @@ a.smalllist-td:hover {
     margin-bottom: 50px;
 }
 
+.question-detail-background {
+    background-color: #35414b;
+    opacity: 0.5;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0px 0px 35px 0px;
+}
+.question-detail-button {
+    background-color: #35414b;
+    font-size:x-large;
+    font-weight: bold;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
 .smalllistdetail-footer {
     background-color: white;
     height: 100px;

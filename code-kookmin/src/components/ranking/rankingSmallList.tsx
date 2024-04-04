@@ -2,52 +2,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RankingListContents from "./rankingListContents";
-
-const rankingEx = [
-    {
-        user_id: 'abc123',
-        tier: 4,
-        bio: '큰 수 계산을 할 줄 아는 사람입니다.',
-        lp: 3,
-        correct: 50,
-    },
-    {
-        user_id: 'def456',
-        tier: 6,
-        bio: '안녕하세요.',
-        lp: 300,
-        correct: 70,
-    },
-    {
-        user_id: 'ghi789',
-        tier: 9,
-        bio: '내용없음',
-        lp: 3,
-        correct: 40,
-    },
-];
+import { DOMAIN_NAME } from "../../App";
 
 export interface Ranking {
-    user_id: string;
+    userId: string;
     tier: number;
     bio: string;
-    lp: number;
-    correct: number;
+    totalSolvedWeight: number;
+    totalSolved: number;
 }
 
 const RankingList = () => {
     let [list, setList] = useState<Ranking[]>([])
 
     function getRanking() {
-        axios.get(`/user/rankings`)
+        axios.get(`${DOMAIN_NAME}/user/rankings`)
             .then((result) => {
                 setList(result.data);
+                console.log(result.data);
             });
     }
 
     useEffect(() => {
-        // getRanking()
-        setList(rankingEx)
+        getRanking()
+        // setList(rankingEx)x
     }, [])
 
     return (
