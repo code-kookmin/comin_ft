@@ -6,13 +6,125 @@ import tier0 from "../assets/티어아이콘/0.svg";
 import { Link } from "react-router-dom";
 import { DOMAIN_NAME } from "../App";
 
-interface UnratedQuestion {
+export interface UnratedQuestion {
     titleKo: string;
-    description: string;
+    // description: string[];
     problemId: number
 }
+interface QuestionBody {
+    problemDescription: string[][];
+}
 
-const QuestionBox: React.FC<{ question: UnratedQuestion }> = ({ question }) => {
+const SmallListDetail: React.FC = () => {
+    const [unratedQuestions, setUnratedQuestions] = useState<UnratedQuestion[]>([]);
+    const [questionDescription, setQuestionDescription] = useState<string[][]>([[]]);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+    async function getCategory() {
+        try {
+            const result = await axios.get(`${DOMAIN_NAME}/problem/recommendation`);
+            setUnratedQuestions(result.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    async function getQuestionBody(unratedQuestions: UnratedQuestion[]) {
+        const problemIds: number[] = unratedQuestions.map(data => data.problemId);
+        try {
+            problemIds.map(async (a, i) => {
+                const result = await axios.get(`${DOMAIN_NAME}/problem/${problemIds[i]}`);
+                console.log(result.data.problemDescription)
+                copyList(questionDescription, result.data.problemDescription, setQuestionDescription)
+            })
+            // setQuestionBody(result.data.problemDescription);
+            console.log(questionDescription)
+        }
+        catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    function copyList(list: any[], data: string[], setList: React.Dispatch<React.SetStateAction<any[]>>) {
+        const copiedList = [...list];
+        copiedList.push(data);
+        setList(copiedList);
+    }
+
+    const onNextClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % (unratedQuestions.length));
+    };
+
+    const onPreviousClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + (unratedQuestions.length)) % (unratedQuestions.length));
+    };
+
+    useEffect(() => {
+        getCategory();
+        getQuestionBody(unratedQuestions);
+    }, []);
+
+    return (
+        <>
+            <SmallListHeader />
+
+            <div className="smalllistdetail-main">
+                <div className="smalllistdetail-main-now">
+                    <QuestionBoxBefore
+                        key={0}
+                        question={unratedQuestions[(currentIndex - 1 + unratedQuestions.length) % unratedQuestions.length] || { title: "" }}
+                        questionDescription={questionDescription[(currentIndex - 1 + unratedQuestions.length) % unratedQuestions.length]} />
+                    <div className="smalllistdetail-button" onClick={onPreviousClick}>
+                        <FontAwesomeIcon className="hover-click" icon={faChevronLeft} />
+                    </div>
+                    <QuestionBox
+                        key={1}
+                        question={unratedQuestions[currentIndex] || { title: "" }}
+                        questionDescription={questionDescription[(currentIndex - 1 + unratedQuestions.length) % unratedQuestions.length]} />
+                    <div className="smalllistdetail-button" onClick={onNextClick}>
+                        <FontAwesomeIcon className="hover-click" icon={faChevronRight} />
+                    </div>
+                    <QuestionBoxBefore
+                        key={2}
+                        question={unratedQuestions[(currentIndex + 1) % unratedQuestions.length] || { title: "" }}
+                        questionDescription={questionDescription[(currentIndex - 1 + unratedQuestions.length) % unratedQuestions.length]} />
+
+                </div>
+            </div>
+
+
+            <div className="smalllistdetail-footer">
+                {unratedQuestions[currentIndex] && (
+                    <>
+                        <Link to={`https://www.acmicpc.net/problem/${unratedQuestions[currentIndex].problemId}`}>
+                            <button className="question-button hover-click">풀어보기</button>
+                        </Link>
+                        <button onClick={() => getQuestionBody(unratedQuestions)}>sdf</button>
+                    </>
+                )}
+            </div>
+        </>
+    );
+};
+
+function SmallListHeader() {
+    const [tooltip, setTooltip] = useState<boolean>(false);
+
+    return (
+        <div className="smalllistdetail-header">
+            <h1>티어를 매겨주세요</h1>
+            <div className="smalllistdetail-detail">
+                아직 티어가 매겨지지 않은 문제들이 매주 5문제씩 추천됩니다. 여러분도 문제에 도전하고 solved.ac의 기여자가 되세요!
+            </div>
+            <div className="smalllistdetail-tooltip" onClick={() => setTooltip(!tooltip)}>
+                어떻게 하는 거에요?
+            </div>
+            {tooltip && <RecommendToolTip />}
+        </div>
+    )
+}
+
+const QuestionBox: React.FC<{ question: UnratedQuestion, questionDescription: string[] }> = ({ question, questionDescription }) => {
     return (
         <div className="question-box-main">
             <div className="question-box-line"></div>
@@ -20,11 +132,44 @@ const QuestionBox: React.FC<{ question: UnratedQuestion }> = ({ question }) => {
                 <div className="question-header">
                     <img className="no-tier-img" src={tier0} alt={`Tier0`} />
                     <span className="question-title">{question.titleKo}</span>
-                    {/* 이미지 소스 추가 */}
                 </div>
                 <div className="question-main">
                     <div className="question-main-header">문제 본문</div>
-                    <div className="question-detail">{question.description}</div>
+                    <div className="question-detail">
+                        {
+                            questionDescription?.map((data, i) => {
+                                return (
+                                    <span key={i}>{data}</span>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const QuestionBoxBefore: React.FC<{ question: UnratedQuestion, questionDescription: string[] }> = ({ question, questionDescription }) => {
+    return (
+        <div className="question-box-main">
+            <div className="question-box-line question-box-translucent"></div>
+            <div className="question-box question-box-translucent">
+                <div className="question-header">
+                    <img className="no-tier-img" src={tier0} alt={`Tier0`} />
+                    <span className="question-title">{question.titleKo}</span>
+                </div>
+                <div className="question-main">
+                    <div className="question-main-header">문제 본문</div>
+                    <div className="question-detail">
+                        {
+                            questionDescription?.map((data, i) => {
+                                return (
+                                    <span key={i}>{data}</span>
+                                );
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,94 +197,6 @@ const RecommendToolTip: React.FC = () => {
                 </span>
             </div>
         </div>
-    );
-};
-
-const QuestionBoxBefore: React.FC<{ question: UnratedQuestion }> = ({ question }) => {
-    return (
-        <div className="question-box-main">
-            <div className="question-box-line question-box-translucent"></div>
-            <div className="question-box question-box-translucent">
-                <div className="question-header">
-                    <img className="no-tier-img" src={tier0} alt={`Tier0`} />
-                    <span className="question-title">{question.titleKo}</span>
-                </div>
-                <div className="question-main">
-                    <div className="question-main-header">문제 본문</div>
-                    <div className="question-detail">{question.description}</div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-
-const SmallListDetail: React.FC = () => {
-    const [tooltip, setTooltip] = useState<boolean>(false);
-    const [unratedQuestions, setUnratedQuestions] = useState<UnratedQuestion[]>([]);
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-    const setTooltipFunction = () => {
-        setTooltip(!tooltip);
-    };
-
-    const onNextClick = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % (unratedQuestions.length));
-    };
-
-    const onPreviousClick = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + (unratedQuestions.length)) % (unratedQuestions.length));
-    };
-
-    async function getCategory() {
-        try {
-            const result = await axios.get(`${DOMAIN_NAME}/problem/recommendation`);
-            setUnratedQuestions(result.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    }
-
-    useEffect(() => {
-        getCategory();
-    }, []);
-
-    return (
-        <>
-            <div className="smalllistdetail-header">
-                <h1>티어를 매겨주세요</h1>
-                <div className="smalllistdetail-detail">
-                    아직 티어가 매겨지지 않은 문제들이 매주 5문제씩 추천됩니다. 여러분도 문제에 도전하고 solved.ac의 기여자가 되세요!
-                </div>
-                <div className="smalllistdetail-tooltip" onClick={setTooltipFunction}>
-                    어떻게 하는 거에요?
-                </div>
-                {tooltip && <RecommendToolTip />}
-            </div>
-
-            <div className="smalllistdetail-main">
-                <div className="smalllistdetail-main-now">
-                    <QuestionBoxBefore key={0} question={unratedQuestions[(currentIndex - 1 + unratedQuestions.length) % unratedQuestions.length] || { title: "", description: "" }} />
-                    <div className="smalllistdetail-button" onClick={onPreviousClick}>
-                        <FontAwesomeIcon className="hover-click" icon={faChevronLeft} />
-                    </div>
-                    <QuestionBox key={1} question={unratedQuestions[currentIndex] || { title: "", description: "" }} />
-                    <div className="smalllistdetail-button" onClick={onNextClick}>
-                        <FontAwesomeIcon className="hover-click" icon={faChevronRight} />
-                    </div>
-                    <QuestionBoxBefore key={2} question={unratedQuestions[(currentIndex + 1) % unratedQuestions.length] || { title: "", description: "" }} />
-                </div>
-            </div>
-
-
-            <div className="smalllistdetail-footer">
-                {unratedQuestions[currentIndex] && (
-                    <Link to={`https://www.acmicpc.net/problem/${unratedQuestions[currentIndex].problemId}`}>
-                        <button className="question-button hover-click">풀어보기</button>
-                    </Link>
-                )}
-            </div>
-        </>
     );
 };
 
