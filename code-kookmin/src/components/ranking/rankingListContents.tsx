@@ -85,7 +85,7 @@ const RankingListContents: React.FC<RankingListContentsProps> = ({ list }) => {
                         <div className="smalllist-td">{index + 1}</div>
                     </td>
                     <td className="smalllist-td-14">
-                        <Link to={`https://www.acmicpc.net/user/${value.user_id}`} target="_blank"><div className="smalllist-td">{value.user_id}</div></Link>
+                        <Link to={`https://www.acmicpc.net/user/${value.userId}`} target="_blank"><div className="smalllist-td">{value.userId}</div></Link>
                     </td>
 
                     <td className="smalllist-td-10">
@@ -98,13 +98,13 @@ const RankingListContents: React.FC<RankingListContentsProps> = ({ list }) => {
                         </div>
                     </td>
                     <td className="smalllist-td-100">
-                        <Link className="smalllist-td" to={`https://www.acmicpc.net/user/${value.user_id}`} target="_blank">{value.bio}</Link>
+                        <Link className="smalllist-td" to={`https://www.acmicpc.net/user/${value.userId}`} target="_blank">{value.bio}</Link>
                     </td>
                     <td className="smalllist-td-14">
-                        <div className="smalllist-td">{value.lp}</div>
+                        <div className="smalllist-td">{value.totalSolvedWeight}</div>
                     </td>
                     <td className="smalllist-td-10">
-                        <div className="smalllist-td">{value.correct}</div>
+                        <div className="smalllist-td">{value.totalSolved}</div>
                     </td>
                 </tr>
             ))}

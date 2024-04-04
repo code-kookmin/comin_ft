@@ -19,6 +19,7 @@ const SmallListDetail: React.FC = () => {
     const [unratedQuestions, setUnratedQuestions] = useState<UnratedQuestion[]>([]);
     const [questionDescription, setQuestionDescription] = useState<string[][]>([[]]);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
+    let [isDescription, setIsDescription] = useState<boolean>(false)
 
     async function getCategory() {
         try {
@@ -29,39 +30,18 @@ const SmallListDetail: React.FC = () => {
         }
     }
 
-    async function getQuestionBody(unratedQuestions: UnratedQuestion[]) {
-        const problemIds: number[] = unratedQuestions.map(data => data.problemId);
-        try {
-            problemIds.map(async (a, i) => {
-                const result = await axios.get(`${DOMAIN_NAME}/problem/${problemIds[i]}`);
-                console.log(result.data.problemDescription)
-                copyList(questionDescription, result.data.problemDescription, setQuestionDescription)
-            })
-            // setQuestionBody(result.data.problemDescription);
-            console.log(questionDescription)
-        }
-        catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    }
-
-    function copyList(list: any[], data: string[], setList: React.Dispatch<React.SetStateAction<any[]>>) {
-        const copiedList = [...list];
-        copiedList.push(data);
-        setList(copiedList);
-    }
-
     const onNextClick = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % (unratedQuestions.length));
+        setIsDescription(false)
     };
 
     const onPreviousClick = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + (unratedQuestions.length)) % (unratedQuestions.length));
+        setIsDescription(false)
     };
 
     useEffect(() => {
         getCategory();
-        getQuestionBody(unratedQuestions);
     }, []);
 
     return (
@@ -80,7 +60,9 @@ const SmallListDetail: React.FC = () => {
                     <QuestionBox
                         key={1}
                         question={unratedQuestions[currentIndex] || { title: "" }}
-                        questionDescription={questionDescription[(currentIndex - 1 + unratedQuestions.length) % unratedQuestions.length]} />
+                        isDescription={isDescription}
+                        setIsDescription={setIsDescription}
+                    />
                     <div className="smalllistdetail-button" onClick={onNextClick}>
                         <FontAwesomeIcon className="hover-click" icon={faChevronRight} />
                     </div>
@@ -96,10 +78,9 @@ const SmallListDetail: React.FC = () => {
             <div className="smalllistdetail-footer">
                 {unratedQuestions[currentIndex] && (
                     <>
-                        <Link to={`https://www.acmicpc.net/problem/${unratedQuestions[currentIndex].problemId}`}>
+                        <Link to={`https://www.acmicpc.net/problem/${unratedQuestions[currentIndex].problemId}`} target="_blank">
                             <button className="question-button hover-click">풀어보기</button>
                         </Link>
-                        <button onClick={() => getQuestionBody(unratedQuestions)}>sdf</button>
                     </>
                 )}
             </div>
@@ -124,7 +105,21 @@ function SmallListHeader() {
     )
 }
 
-const QuestionBox: React.FC<{ question: UnratedQuestion, questionDescription: string[] }> = ({ question, questionDescription }) => {
+const QuestionBox: React.FC<{ question: UnratedQuestion, isDescription: boolean, setIsDescription: any }> = ({ question, isDescription, setIsDescription }) => {
+    // let [isDescription, setIsDescription] = useState<boolean>(false)
+    let [description, setDescription] = useState<string[]>([])
+
+    async function getQuestionBody(unratedQuestionNum: number) {
+        try {
+            const result = await axios.get(`${DOMAIN_NAME}/problem/${unratedQuestionNum}`);
+            setDescription(result.data.problemDescription)
+            setIsDescription(true)
+        }
+        catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
     return (
         <div className="question-box-main">
             <div className="question-box-line"></div>
@@ -137,12 +132,20 @@ const QuestionBox: React.FC<{ question: UnratedQuestion, questionDescription: st
                     <div className="question-main-header">문제 본문</div>
                     <div className="question-detail">
                         {
-                            questionDescription?.map((data, i) => {
-                                return (
-                                    <span key={i}>{data}</span>
-                                );
-                            })
+                            isDescription
+                                ? description?.map((data, i) => {
+                                    return (
+                                        <>
+                                            <span>{data}</span><br />
+                                        </>
+                                    )
+                                })
+                                : <div className="question-detail-background" onClick={() => { getQuestionBody(question.problemId) }}>
+                                    <button className="question-detail-button" onClick={() => { getQuestionBody(question.problemId) }}>본 문  보 기</button>
+                                </div>
                         }
+
+
                     </div>
                 </div>
             </div>
