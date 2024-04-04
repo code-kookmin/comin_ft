@@ -358,6 +358,13 @@ a.smalllist-td:hover {
 
 .question-detail {
     margin: 10px 15px;
+    max-height: 220px;
+    overflow-y: scroll;
+    font-size: large;
+}
+
+.question-detail span {
+    margin-bottom: 50px;
 }
 
 .smalllistdetail-footer {
