@@ -108,7 +108,7 @@ function CommunityUpdate({ post }: { post: PostUpdateProps }) {
                         {
                           value.sub?.map((a, i) => {
                             return (
-                              a.id === post.post.category_id
+                              a.id === post.post.categoryId
                                 ? <option key="123" value={a.id} selected>- {a.name}</option>
                                 : <option key="123" value={a.id}>- {a.name}</option>
                             )
@@ -149,7 +149,7 @@ function CommunityUpdate({ post }: { post: PostUpdateProps }) {
                 <div className='write-contents-footer-detail'>
                   <div>
                     <FontAwesomeIcon icon={faUser} />
-                    <input type="text" className="write-note-writer" name="writer" value={post.post.user_id} readOnly />
+                    <input type="text" className="write-note-writer" name="writer" value={post.post.userId} readOnly />
                   </div>
                   <div>
                     <FontAwesomeIcon icon={faCalendar} />
