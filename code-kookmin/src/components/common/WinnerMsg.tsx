@@ -1,17 +1,29 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import userImg from '../../assets/user1.jpg';
+import { DOMAIN_NAME } from '../../App';
 
 interface WinnerProps {
     winnerUser: {
-        email: 'string';
-        password: 'string';
-        name: 'string';
-        birthday: 'string';
-        githubName: 'string';
-        baekjoonName: 'string';
+        userId: string;
+        password: string;
+        name: string;
+        birthday: string;
+        githubName: string;
+        baekjoonName: string;
     }[];
 }
 
 const WinnerMsg: React.FC<WinnerProps> = ({ winnerUser }) => {
+    let [list, setList] = useState<WinnerProps[]>([]);
+
+    //랭킹 api에서 1,2,3등 가져오기
+    function getWinner() {
+        axios.get(`${DOMAIN_NAME}/problem/recommendation`).then((result) => {
+            console.log(result.data);
+            setList(result.data);
+        });
+    }
     return (
         <>
             <ul className="community-post-comments">
