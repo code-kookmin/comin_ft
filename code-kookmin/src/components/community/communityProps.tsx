@@ -11,8 +11,8 @@ export interface PostListProps {
     id: number;
     post: {
         title: string,
-        category_id: number,
-        user_id: string,
+        categoryId: number,
+        userId: string,
         date: string, //나중에 Date형식으로 변환
         like: number,
         comments: number
@@ -23,14 +23,14 @@ export interface PostDetailProps {
     id: number;
     post: {
         title: string,
-        category_id: number,
+        categoryId: number,
         date: string,//나중에 Date형식으로 변환
-        user_id: string,
+        userId: string,
         views: number,
         detail: string,
         like: number,
         comments: {
-            user_id: string,
+            userId: string,
             date: string,
             detail: string,
             like: number,
@@ -42,9 +42,9 @@ export interface PostUpdateProps {
     id: number;
     post: {
         title: string,
-        category_id: number,
+        categoryId: number,
         date: string,//나중에 Date형식으로 변환
-        user_id: string,
+        userId: string,
         detail: string,
     };
 }
@@ -123,22 +123,22 @@ export let category = [{
 
 export let postlistEx = [
     {
-        id: 123,
+        id: 6,
         post: {
             title: '제목111',
-            category_id: 3,
-            user_id: "유저아이디1",
+            categoryId: 3,
+            userId: "유저아이디1",
             date: '23.09.24',
             like: 3,
             comments: 12
         },
     },
     {
-        id: 124,
+        id: 7,
         post: {
             title: '제목2',
-            category_id: 2,
-            user_id: "유저아이디2",
+            categoryId: 2,
+            userId: "유저아이디2",
             date: '23.09.25',
             like: 5,
             comments: 19
@@ -147,30 +147,29 @@ export let postlistEx = [
 ]
 
 export let postEx = [{
-    id: 123,
+    id: 6,
     post: {
         title: '아니 이거 머임?',
-        category_id: 3,
+        categoryId: 3,
         date: '23.09.24',
-        user_id: "유저아이디1",
+        userId: "유저아이디1",
         views: 30,
         detail: "이코드어케짜냐고 100번물었다",
         like: 4,
         comments: [{
-            user_id: "댓글작성자1",
+            userId: "댓글작성자1",
             date: '23.09.24',
             detail: "이케이케하면댐",
             like: 123
         },
         {
-            user_id: "댓글작성자2",
+            userId: "댓글작성자2",
             date: '23.09.26',
             detail: "그걸왜못함ㅋㅋ",
             like: 126
         }]
     }
 }]
-
 
 
 // function getCategoryName(categoryId: number) {

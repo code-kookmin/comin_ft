@@ -59,7 +59,7 @@ function CommunityDetail() {
 
 function PostInfo({ postDetail }: { postDetail: PostDetailProps }) {
 
-  const categoryName = categoryIdToName(postDetail.post.category_id)
+  const categoryName = categoryIdToName(postDetail.post.categoryId)
 
   return (
     <div className='community-post'>
@@ -68,7 +68,7 @@ function PostInfo({ postDetail }: { postDetail: PostDetailProps }) {
         <div className='community-posts-etc'>
           <span>{categoryName}</span>
           <span>&nbsp; {postDetail.post.date}</span>
-          <span>&nbsp; {postDetail.post.user_id}</span>
+          <span>&nbsp; {postDetail.post.userId}</span>
         </div>
         <div className='community-posts-etc'>
           <span>조회수 {postDetail.post.views}</span>
