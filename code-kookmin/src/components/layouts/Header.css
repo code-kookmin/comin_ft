@@ -41,3 +41,32 @@
     background-color: #ece5ff;
     color: #794cff;
 }
+
+.nickname,
+.menu-options {
+    width: 100px;
+    padding: 10px 15px;
+    background-color: white;
+    border: 1px solid #794cff;
+    text-align: center;
+    font-size: 16px;
+    color: #794cff;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.menu-options {
+    position: absolute;
+}
+.menu-options li {
+    align-items: center;
+    margin: 10px;
+}
+
+.menu-options button {
+    border: transparent;
+}
+
+.dropdown-menu img{
+    margin-left: 10px;
+}

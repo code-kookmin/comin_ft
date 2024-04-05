@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // 사용자 데이터 타입 정의
 interface User {
@@ -37,6 +38,7 @@ interface AuthProviderProps {
 // AuthProvider 컴포넌트 구현
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+    const navigate = useNavigate();
 
     const login = (userData: User) => {
         setUser(userData);
@@ -44,6 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logout = () => {
         setUser(null);
+        navigate('/');
     };
 
     return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;

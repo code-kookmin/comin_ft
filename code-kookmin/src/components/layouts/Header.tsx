@@ -3,9 +3,14 @@ import './Header.css';
 import Navigation from './Navigation';
 import logo from '../../assets/logo.png';
 import { useAuth } from '../AuthContext';
+import React, { useState } from 'react';
+import styled from '@material-ui/core/styles/styled';
+import Dropdown from './Dropdown';
 
 const Header = () => {
     const { user, logout } = useAuth();
+    const [view, setView] = useState(false);
+    const [OpenDropdown, setOpenDropdown] = useState(false);
     return (
         <>
             <header className="header">
@@ -15,10 +20,15 @@ const Header = () => {
                     </div>
                     <div className="header-top-right">
                         {user ? (
-                            <>
-                                <p>안녕하세요, {user.name}님! 🎉</p>
-                                <button onClick={logout}>로그아웃</button>
-                            </>
+                            // <ul
+                            //     onClick={() => {
+                            //         setView(!view);
+                            //     }}
+                            // >
+                            //     반가워요, {user.name} 님! {view ? '⌃' : '⌄'}
+                            //     {view && <Dropdown />}
+                            // </ul>
+                            <Dropdown />
                         ) : (
                             <>
                                 <Link className="login" to={'/login'}>
