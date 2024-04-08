@@ -24,7 +24,6 @@
 }
 
 .home-first-group {
-    width: 100%;
     position: relative; /* z-index가 적용되도록 position 설정 */
     z-index: 2; /* circle보다 높게 설정하여 앞에 표시 */
 }
