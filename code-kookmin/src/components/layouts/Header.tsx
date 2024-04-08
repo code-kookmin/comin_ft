@@ -20,14 +20,6 @@ const Header = () => {
                     </div>
                     <div className="header-top-right">
                         {user ? (
-                            // <ul
-                            //     onClick={() => {
-                            //         setView(!view);
-                            //     }}
-                            // >
-                            //     반가워요, {user.name} 님! {view ? '⌃' : '⌄'}
-                            //     {view && <Dropdown />}
-                            // </ul>
                             <Dropdown />
                         ) : (
                             <>

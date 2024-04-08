@@ -15,17 +15,17 @@ const Dropdown = () => {
         <div className="dropdown-menu">
             <div className="nickname" onClick={handleMenuToggle}>
                 <span>{user?.name} </span>
-                <img src={dropdown}/>
+                <img src={dropdown} />
             </div>
             {isMenuOpen && (
                 <div className="menu-options">
                     <ul>
-                        <li>
+                        <li onClick={handleMenuToggle}>
                             <Link className="myInfo" to={'/myInfo'}>
                                 마이페이지
                             </Link>
                         </li>
-                        <li>
+                        <li onClick={handleMenuToggle}>
                             <span onClick={logout}>로그아웃</span>
                         </li>
                     </ul>

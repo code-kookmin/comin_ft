@@ -21,14 +21,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, onItemClick }) => {
                                 내 정보
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link
                                 to="/myActivity"
                                 className={`nav-text ${activeItem === 'myActivity' ? 'active' : ''}`}
                             >
                                 내 활동
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/resetPW" className={`nav-text ${activeItem === 'resetPW' ? 'active' : ''}`}>
                                 비밀번호 변경
