@@ -3,16 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/homePage.css';
 import MainButton from '../components/common/MainButton';
 import search from '../assets/search.png';
-import WinnerMsg from '../components/common/WinnerMsg';
-
-const user1 = {
-    email: 'string',
-    password: 'string',
-    name: 'string',
-    birthday: 'string',
-    githubName: 'string',
-    baekjoonName: 'string',
-};
+import Winners from '../components/common/Winners';
 
 const HomePage: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -71,7 +62,7 @@ const HomePage: React.FC = () => {
                     <div className="home-second-left">
                         <div className="home-second-content-title">💪 THE MOST 💪</div>
                         <div className="home-second-content">
-                            <span>{/* <WinnerMsg winnerUser={user1} /> */}</span>
+                            {/* <span>{<Winners />}</span> */}
                         </div>
                     </div>
                     <div className="home-second-right">
