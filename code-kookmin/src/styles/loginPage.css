@@ -1,12 +1,60 @@
-.login-body {
+.login-body,
+.findPW-body {
     display: block;
     margin-top: 100px;
     margin-bottom: 100px;
 }
 
-.login-title {
+.login-title,
+.findPW-title {
     text-align: center;
     font-size: 30px;
     font-weight: 750;
     padding-bottom: 30px;
+}
+.login-form {
+    max-width: 270px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.login-form .error-message {
+    color: red;
+    margin-top: 5px;
+    text-align: right;
+    font-size: x-small;
+}
+
+.login-form div {
+    margin-bottom: 15px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+}
+.remember-me {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    font-size: small;
+}
+
+.remember-me input {
+    width: 10%;
+}
+
+.forgot-password {
+    color: #794cff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: small;
 }

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface CommentsProps {
     comments: {
-      user_id: string,
+      userId: string,
       date: string,
       detail: string,
       like: number,
@@ -26,7 +26,7 @@ interface CommentsProps {
                 </span>
                 <div className='community-post-comment'>
                   <div className='community-posts-etc'>
-                    <span>{value.user_id}</span>
+                    <span>{value.userId}</span>
                     <span>&nbsp;{value.date}</span>
                   </div>
                   <p>{value.detail}</p>

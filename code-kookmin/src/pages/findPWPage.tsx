@@ -9,9 +9,9 @@ const FindPWPage: React.FC = () => {
     };
 
     return (
-        <div className="body">
-            <div className="title">비밀번호 찾기</div>
-            <div className="content">
+        <div className="findPW-body">
+            <div className="findPW-title">비밀번호 찾기</div>
+            <div className="findPW-content">
                 <FindPWForm onResetPassword={handleResetPassword} />
             </div>
         </div>

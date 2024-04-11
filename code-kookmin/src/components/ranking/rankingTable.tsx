@@ -1,5 +1,3 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { Ranking } from "./rankingSmallList";
 import tier0 from "../../assets/티어아이콘/0.svg";
 import tier1 from "../../assets/티어아이콘/1.svg";
@@ -33,6 +31,7 @@ import tier28 from "../../assets/티어아이콘/28.svg";
 import tier29 from "../../assets/티어아이콘/29.svg";
 import tier30 from "../../assets/티어아이콘/30.svg";
 import tier31 from "../../assets/티어아이콘/31.svg";
+import { Link } from "react-router-dom";
 
 interface RankingListContentsProps {
   list: Ranking[];
@@ -76,16 +75,53 @@ export const tierSVGMap: TierSVGMap = {
   31: tier31,
 };
 
-const RankingListContents: React.FC<RankingListContentsProps> = ({ list }) => {
+const RankingTable: React.FC<RankingListContentsProps> = ({ list }) => {
+  return (
+    <div className="ranking-table-main">
+      <RankingTableTop />
+      <RankingTableDetail list={list} />
+      <div className="ranking-table ranking-table-bottom">
+        <button>더보기</button>
+      </div>
+    </div>
+  );
+};
+
+const RankingTableTop = (props: any) => {
+  return (
+    <div>
+      <div className="ranking-table ranking-table-top">
+        <div className="ranking-table__rank">
+          <span>순위</span>
+        </div>
+        <div className="ranking-table__tier-id">
+          <span>티어</span>
+          <span className="ranking-table-top__id">아이디</span>
+        </div>
+        <div className="ranking-table-top__lp">
+          <span>LP</span>
+        </div>
+        <div className="ranking-table-top__correct">
+          <span>맞힌 문제</span>
+        </div>
+        <div className="ranking-table-top__correct">
+          <span>소속</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RankingTableDetail: React.FC<RankingListContentsProps> = ({ list }) => {
   return (
     <>
       {list.map((value, index) => (
-        <tr className="smalllist-item" key={index}>
-          <td className="smalllist-td-10">
-            <div className="smalllist-td">{index + 1}</div>
-          </td>
-          <td className="smalllist-td-10">
-            <div className="smalllist-td">
+        <div className="ranking-table ranking-table-detail">
+          <div className="ranking-table__rank ranking-table-detail__div">
+            <span>{index + 1}</span>
+          </div>
+          <div className="ranking-table__tier-id">
+            <span className="ranking-tier-div">
               {value.tier ? (
                 <img
                   className="tier-small"
@@ -95,31 +131,29 @@ const RankingListContents: React.FC<RankingListContentsProps> = ({ list }) => {
               ) : (
                 <div>Tier Unknown</div>
               )}
-            </div>
-          </td>
-          <td className="smalllist-td-25">
-            <a
-              href={`https://www.acmicpc.net/user/${value.userId}`}
-              target="_blank"
-              className="smalllist-td smalllist-id"
-            >
-              {value.userId}
-            </a>
-          </td>
-          <td className="smalllist-td-14">
-            <div className="smalllist-td">{value.totalSolvedWeight}</div>
-          </td>
-          <td className="smalllist-td-10">
-            <div className="smalllist-td">{value.totalSolved}</div>
-          </td>
-          <td className="smalllist-td-20">
-          <div className="smalllist-td">국민대학교</div>
-            {/* <div className="smalllist-td">{value.totalSolved}</div> */}
-          </td>
-        </tr>
+            </span>
+            <span className="ranking-table__id">
+              <a
+                href={`https://www.acmicpc.net/user/${value.userId}`}
+                target="_blank"
+              >
+                {value.userId}
+              </a>
+            </span>
+          </div>
+          <div className="ranking-table-detail__div">
+            <span>{value.totalSolvedWeight}</span>
+          </div>
+          <div className="ranking-table-detail__div">
+            <span>{value.totalSolved}</span>
+          </div>
+          <div className="ranking-table-detail__div">
+            <span>국민대학교</span>
+          </div>
+        </div>
       ))}
     </>
   );
 };
 
-export default RankingListContents;
+export default RankingTable;

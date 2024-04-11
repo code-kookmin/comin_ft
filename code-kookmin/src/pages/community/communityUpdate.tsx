@@ -2,90 +2,22 @@ import { faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { RangeStatic } from "quill";
-import { useMemo, useRef, useState } from "react";
+import { SetStateAction, useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill";
+import { category, PostUpdateProps } from "../../components/community/communityProps";
 
-function CommunityWrite() {
-
-  interface Category {
-    id: number;
-    name: string;
-    sub?: { name: string }[];
-  }
-
-  let categoryEx = [{
-    id: 0o00,
-    name: '정보',
-    sub: [
-      {
-        name: '문제추천',
-      },
-      {
-        name: '코딩 뉴스',
-      },
-      {
-        name: '팁과 노하우',
-      }
-    ]
-  }, {
-    id: 0o01,
-    name: '코딩 게시판',
-    sub: [
-      {
-        name: 'Q&A',
-      },
-      {
-        name: '자유',
-      },
-      {
-        name: '언어',
-      },
-      {
-        name: '프로젝트',
-      },
-      {
-        name: '학부생 공부비법',
-      }
-    ]
-  }, {
-    id: 0o02,
-    name: '홍보 게시판',
-    sub: [
-      {
-        name: '대회',
-      },
-      {
-        name: '내 문제 홍보',
-      },
-    ]
-  }, {
-    id: 0o03,
-    name: '문의 게시판',
-    sub: [
-      {
-        name: '문의하기',
-      },
-      {
-        name: '내 문의',
-      }
-    ]
-  },
-  ]
-
-  let [category, setCategory] = useState<Category[]>(categoryEx);
-
-  function getCategory() {
-    axios.get('/community/category')
-      .then((result) => {
-        setCategory(result.data);
-      });
-  }
+function CommunityUpdate({ post }: { post: PostUpdateProps }) {
 
   //quill
   const inputRef = useRef<HTMLInputElement>(null);
   const quillRef = useRef<ReactQuill | null>(null);
-  const [textValue, setTextValue] = useState<string>('');
-  const [username, setUsername] = useState<string>('유저네임');
+  const [textValue, setTextValue] = useState<string>(post.post.detail);
+  const [title, setTitle] = useState<string>(post.post.title);
+  const handleTitleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    // 입력 필드의 새로운 값으로 'title' 상태를 업데이트합니다.
+    setTitle(event.target.value);
+  };
+
 
   const imageHandler = () => {
     console.log('에디터에서 이미지 버튼을 클릭하면 핸들러가 시작됩니다!');
@@ -104,7 +36,7 @@ function CommunityWrite() {
         formData.append('img', file);
 
         try {
-          const result = await axios.post<{ url: string }>('/note/img', formData);
+          const result = await axios.post<{ url: string }>('/community/img', formData);
           console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
           const IMG_URL = result.data.url;
 
@@ -116,6 +48,7 @@ function CommunityWrite() {
           }
         } catch (error) {
           console.log('실패했어요ㅠ', error);
+          alert('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
         }
       }
     });
@@ -147,19 +80,15 @@ function CommunityWrite() {
   ];
 
   let today = new Date();
-  let year: number = today.getFullYear();
-  let month: string | number = today.getMonth() + 1;
-  if (month < 10) { month = 0 + String(month) };
-  let date: string | number = today.getDate();
-  if (date < 10) { date = '0' + String(date) };
+  let year = today.getFullYear();
+  let month = `${today.getMonth() + 1}`.padStart(2, '0'); // padStart를 사용하여 두 자리수 유지
+  let date = `${today.getDate()}`.padStart(2, '0');
 
   const checkTextLength = () => {
     if (textValue.trim().length === 0) {
       setTextValue('내용이 없습니다');
-      // length가 0이면 POST 막기
     }
   };
-
 
   return (
     <div className="community-body">
@@ -168,19 +97,20 @@ function CommunityWrite() {
       <main className='community-main'>
         <div className='community-write-zone'>
           <div className="write-zone">
-            <h1>게시글 작성</h1>
-            <form className="write-zone-form" method="POST" action="/neighbor-ad">
+            <h1>게시글 수정</h1>
+            <form className="write-zone-form" method="POST" action="/community">
               <select name="category">
-                <option key="none" value="none">카테고리 없음</option>
                 {
                   category.map((value, index) => {
                     return (
                       <>
-                        <option key="123" value={value.name}>{value.name}</option>
+                        <option key="123" value={value.id} disabled>{value.name}</option>
                         {
                           value.sub?.map((a, i) => {
                             return (
-                              <option key="123" value={a.name}>- {a.name}</option>
+                              a.id === post.post.categoryId
+                                ? <option key="123" value={a.id} selected>- {a.name}</option>
+                                : <option key="123" value={a.id}>- {a.name}</option>
                             )
                           })
                         }
@@ -194,6 +124,8 @@ function CommunityWrite() {
                 className="write-title"
                 placeholder="제목"
                 name="title"
+                value={title}
+                onChange={handleTitleChange}
               />
               <div className='write-contents-main'>
                 <ReactQuill
@@ -217,14 +149,14 @@ function CommunityWrite() {
                 <div className='write-contents-footer-detail'>
                   <div>
                     <FontAwesomeIcon icon={faUser} />
-                    <input type="text" className="write-note-writer" name="writer" value={username} readOnly />
+                    <input type="text" className="write-note-writer" name="writer" value={post.post.userId} readOnly />
                   </div>
                   <div>
                     <FontAwesomeIcon icon={faCalendar} />
-                    <input type="text" className="write-note-write-date" name="writeDate" value={year + '.' + month + '.' + date} readOnly />
+                    <input type="text" className="write-note-write-date" name="writeDate" value={post.post.date} readOnly />
                   </div>
                 </div>
-                <button className="write-contents-submit community-click" type='submit' onClick={() => { checkTextLength(); }}>발행</button>
+                <button className="write-contents-submit community-click" type='submit' onClick={() => { checkTextLength(); }}>수정</button>
               </div>
 
             </form>
@@ -233,8 +165,9 @@ function CommunityWrite() {
         </div>
 
       </main>
-      {/* 글 작성하기 끝 */}
-    </div >
+      
+    </div>
   );
 }
-export default CommunityWrite;
+
+export default CommunityUpdate;
